@@ -45,8 +45,9 @@
 !define LIBS_PATH "${PROJECT_PATH}\libs"
 !define INSTALL_PATH "${PROJECT_PATH}\install"
 !define SOURCE_PATH "${PROJECT_PATH}\desktop"
-!define VCREDISTPATH "$%VCINSTALLDIR%\Redist\MSVC\14.14.26405"
+!define VCREDISTPATH "$%VCINSTALLDIR%\Redist\MSVC\$%VCVER%"
 !define OPENSSL_PATH "$%OPENSSL_PATH%"
+!define ZLIB_PATH "$%ZLIB_PATH%"
 !define EXTRA_PATH "${PROJECT_PATH}\extra_libs" ;TODO
 !define CURRENT_PATH "${PROJECT_PATH}\client-building"
 !define P12_KEY_PATH "${PROJECT_PATH}\key"
@@ -59,7 +60,7 @@
 ;-----------------------------------------------------------------------------
 ; !finalize helpers: calls to system() after the output EXE has been generated
 ;-----------------------------------------------------------------------------
-!define SIGNTOOL "C:\Program Files (x86)/Windows Kits/10/bin/10.0.17134.0/x86/signtool.exe"
+!define SIGNTOOL "signtool.exe"
 !define P12_KEY "${P12_KEY_PATH}\${APPLICATION_VENDOR}.p12"
 !define P12_KEY_PASSWORD "$%P12_KEY_PASSWORD%"
 
@@ -89,8 +90,8 @@ Var NoAutomaticUpdates
 !define INSTALLER_FILENAME "${APPLICATION_NAME}-${VERSION}-${MIRALL_VERSION_SUFFIX}-${BUILD_TIME_FILENAME}.exe"
 Name "Nextcloud"
 BrandingText "${APPLICATION_NAME} ${VERSION} - ${BUILD_TIME}"
-OutFile "${PROJECT_PATH}\client-building\daily\${INSTALLER_FILENAME}"
-InstallDir "$PROGRAMFILES\Nextcloud"
+OutFile "${PROJECT_PATH}\daily\${INSTALLER_FILENAME}"
+InstallDir "$PROGRAMFILES64\Nextcloud"
 InstallDirRegKey HKCU "Software\${APPLICATION_VENDOR}\${APPLICATION_NAME}" ""
 InstType Standard
 InstType Full
@@ -389,18 +390,19 @@ FunctionEnd
 #                                                                            #
 ##############################################################################
 Section "${APPLICATION_NAME}" SEC_APPLICATION
-   SectionIn 1 2 3 RO
-   SetDetailsPrint listonly
+    SectionIn 1 2 3 RO
+    SetDetailsPrint listonly
 
-   SetDetailsPrint textonly
-   DetailPrint $SEC_APPLICATION_DETAILS
-   SetDetailsPrint listonly
-   SetOutPath "$INSTDIR"
+    SetDetailsPrint textonly
+    DetailPrint $SEC_APPLICATION_DETAILS
+    SetDetailsPrint listonly
+    SetOutPath "$INSTDIR"
 
     File /r "${INSTALL_PATH}\bin\*"
 
 ; exclude system file list
     File /r "${INSTALL_PATH}\config\Nextcloud\sync-exclude.lst"
+
     File "${INSTALL_PATH}\bin\nextcloud\ocsync.dll"
 
 ; icon
@@ -411,9 +413,9 @@ Section "${APPLICATION_NAME}" SEC_APPLICATION
 
 ; extra dll's
     File "${OPENSSL_PATH}\bin\libcrypto-1_1-x64.dll"
-    File "${OPENSSL_PATH}\bin\msvcr120.dll"
 
 ; TODO needs to be done properly
+    File "${EXTRA_PATH}\msvcr120.dll"
     File "${EXTRA_PATH}\ucrtbased.dll"
     File "${EXTRA_PATH}\libeay32.dll"
     File "${EXTRA_PATH}\ssleay32.dll"
@@ -425,12 +427,14 @@ Section "${APPLICATION_NAME}" SEC_APPLICATION
     File "${VCREDISTPATH}\debug_nonredist\x64\Microsoft.VC141.DebugCRT\msvcp140d.dll"
     File "${VCREDISTPATH}\debug_nonredist\x64\Microsoft.VC141.DebugCRT\vcruntime140d.dll"
 
+    File "${ZLIB_PATH}\bin\zlib.dll"
+
 ; translations TODO put the translations under the folder translations
-   SetOutPath "$INSTDIR\i18n"
+    SetOutPath "$INSTDIR\i18n"
     File /r "${INSTALL_PATH}\i18n\*"
 
 ; to be executed after the installer is created
-   !finalize '"${SIGNTOOL}" sign /debug /v /n "${APPLICATION_VENDOR}" /tr http://tsa.swisssign.net /td sha256 /fd sha256 /f "${P12_KEY}" /p "${P12_KEY_PASSWORD}" "%1"'
+   !finalize '"${SIGNTOOL}" sign /debug /v /tr http://tsa.swisssign.net /td sha256 /fd sha256 /f "${P12_KEY}" /p "${P12_KEY_PASSWORD}" "%1"'
    !finalize '"${CURRENT_PATH}\upload.bat" "%1"'
 SectionEnd
 

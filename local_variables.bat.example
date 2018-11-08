@@ -1,0 +1,21 @@
+@echo off
+
+set VCINSTALLDIR=c:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC
+set VCVER=14.15.26706
+
+set QT_PATH=c:\Qt\5.11.2\msvc2017_64
+set PROJECT_PATH=...\project
+set Png2Ico_EXECUTABLE=...\png2ico.exe
+
+set QTKEYCHAIN_INCLUDE_DIR=...\qtkeychain-bin\include\qt5keychain
+set QTKEYCHAIN_LIBRARY=...\qtkeychain-bin\lib\qt5keychain.lib
+
+set OPENSSL_PATH=...\openssl-1.1\x64
+set OPENSSL_INCLUDE_DIR=...\openssl-1.1\include
+set OPENSSL_LIBRARIES=...\openssl-1.1\x64\lib
+
+set ZLIB_PATH=...\zlib-bin
+set ZLIB_LIBRARY=...\zlib-bin\lib\zlib.lib
+set ZLIB_INCLUDE_DIR=...\zlib-bin\include
+
+set P12_KEY_PASSWORD=...

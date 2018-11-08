@@ -1,3 +1,2 @@
 *.kdev4
-key/
-daily/
+local_variables.bat
