@@ -226,7 +226,7 @@ if "%USE_CODE_SIGNING%" == "0" (
             "shellext/OCUtil.dll"
             "%APP_NAME_SANITIZED%.exe"
             "%APP_NAME_SANITIZED%cmd.exe"
-            "%APP_NAME_SANITIZED%sync.dll"
+            "nextcloudsync.dll"
             "OCContextMenu.dll"
             "OCOverlays.dll"
             "ocsync.dll"
