@@ -1,10 +1,14 @@
 ;Nextcloud installer script.
+!if "$%USE_BRANDING%" == "1" 
+	!define APPLICATION_NAME "$%APP_NAME%"
+!else
+    !define APPLICATION_NAME "nextcloud"
+!endif
 
-!define APPLICATION_SHORTNAME "nextcloud"
-!define APPLICATION_NAME "Nextcloud"
+!define APPLICATION_SHORTNAME "${APPLICATION_NAME}"
 !define APPLICATION_VENDOR "$%APPLICATION_VENDOR%"
-!define APPLICATION_EXECUTABLE "nextcloud.exe"
-!define APPLICATION_CMD_EXECUTABLE "nextcloudcmd.exe"
+!define APPLICATION_EXECUTABLE "${APPLICATION_NAME}.exe"
+!define APPLICATION_CMD_EXECUTABLE "${APPLICATION_NAME}cmd.exe"
 !define APPLICATION_CONFIG_FILE "nextcloud.cfg"
 !define APPLICATION_DOMAIN "nextcloud.com"
 !define APPLICATION_LICENSE ""
