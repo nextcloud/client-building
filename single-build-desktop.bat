@@ -158,10 +158,10 @@ if "%USE_BRANDING%" == "1" (
      if exist "%MY_INSTALL_PATH%/bin/nextcloud/" (
 	    start "mkdir " /B /wait "%WIN_GIT_PATH%\usr\bin\mkdir.exe" -p "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%/"
 		start "mv bin files" /B /wait mv "%MY_INSTALL_PATH%/bin/nextcloud/"* "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%/"
-		start "rm -rf" /B /wait rm -drf "%MY_INSTALL_PATH%/bin/nextcloud/"
+		start "rm branded dir" /B /wait rm -drf "%MY_INSTALL_PATH%/bin/nextcloud/"
 	    start "mkdir %MY_INSTALL_PATH%/config/%APP_NAME%/" /B /wait "%WIN_GIT_PATH%\usr\bin\mkdir.exe" -p "%MY_INSTALL_PATH%/config/%APP_NAME%/"
 		start "mv config files" /B  /wait mv "%MY_INSTALL_PATH%/config/nextcloud/"* "%MY_INSTALL_PATH%/config/%APP_NAME%/"
-		start "rm -rf" /B /wait rm -drf "%MY_INSTALL_PATH%/config/nextcloud/"
+		start "rm branded dir" /B /wait rm -drf "%MY_INSTALL_PATH%/config/nextcloud/"
      )		
 )
 
