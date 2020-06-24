@@ -1,10 +1,14 @@
 ;Nextcloud installer script.
-
-!define APPLICATION_SHORTNAME "nextcloud"
-!define APPLICATION_NAME "Nextcloud"
+!if "$%USE_BRANDING%" == "1" 
+	!define APPLICATION_NAME "$%APP_NAME%"
+!else
+    !define APPLICATION_NAME "nextcloud"
+!endif
+!define APPLICATION_SHORTNAME "${APPLICATION_NAME}"
+!define APPLICATION_NAME "${APPLICATION_NAME}"
 !define APPLICATION_VENDOR "$%APPLICATION_VENDOR%"
-!define APPLICATION_EXECUTABLE "nextcloud.exe"
-!define APPLICATION_CMD_EXECUTABLE "nextcloudcmd.exe"
+!define APPLICATION_EXECUTABLE "${APPLICATION_NAME}.exe"
+!define APPLICATION_CMD_EXECUTABLE "${APPLICATION_NAME}cmd.exe"
 !define APPLICATION_CONFIG_FILE "nextcloud.cfg"
 !define APPLICATION_DOMAIN "nextcloud.com"
 !define APPLICATION_LICENSE ""
@@ -57,7 +61,7 @@
 ;-----------------------------------------------------------------------------
 
 ; Safe to use Win64's exe version since we require both builds for this combined installer.
-!getdllversion "${SETUP_COLLECTION_PATH}\Win64\nextcloud.exe" expv_
+!getdllversion "${SETUP_COLLECTION_PATH}\Win64\${APPLICATION_NAME}.exe" expv_
 !define VER_MAJOR "${expv_1}"
 !define VER_MINOR "${expv_2}"
 !define VER_PATCH "${expv_3}"
@@ -77,10 +81,10 @@ Var NoAutomaticUpdates
 ;-----------------------------------------------------------------------------
 
 !define INSTALLER_FILENAME "${APPLICATION_SHORTNAME}-${VERSION}-${MIRALL_VERSION_SUFFIX}-${BUILD_TIME_FILENAME}-${BUILD_TYPE}.exe"
-Name "Nextcloud"
+Name "${APPLICATION_NAME}"
 BrandingText "${APPLICATION_NAME} ${VERSION} - ${BUILD_TIME}"
 ;IS_INNER_SIGN_UNINSTALLER;OutFile "${PROJECT_PATH}\client-building\daily\${INSTALLER_FILENAME}"
-InstallDir "$PROGRAMFILES64\Nextcloud"    ; use the correct path for Win64 (on Win32 this is identical to $PROGRAMFILES)
+InstallDir "$PROGRAMFILES64\${APPLICATION_NAME}"    ; use the correct path for Win64 (on Win32 this is identical to $PROGRAMFILES)
 InstallDirRegKey HKCU "Software\${APPLICATION_VENDOR}\${APPLICATION_NAME}" ""
 InstType Standard
 InstType Full
@@ -477,7 +481,7 @@ SectionGroup $SectionGroup_Shortcuts
       DetailPrint $OPTION_SECTION_SC_START_MENU_DetailPrint
       SetDetailsPrint listonly
       SetShellVarContext all
-      CreateShortCut "$SMPROGRAMS\${APPLICATION_NAME}.lnk" "$INSTDIR\${APPLICATION_EXECUTABLE}" "" "$INSTDIR\nextcloud.ico" 0
+      CreateShortCut "$SMPROGRAMS\${APPLICATION_NAME}.lnk" "$INSTDIR\${APPLICATION_EXECUTABLE}" "" "$INSTDIR\${APPLICATION_NAME}.ico" 0
       SetShellVarContext current
    ${MementoSectionEnd}
 !endif
@@ -489,7 +493,7 @@ SectionGroup $SectionGroup_Shortcuts
       DetailPrint $OPTION_SECTION_SC_DESKTOP_DetailPrint
       SetDetailsPrint listonly
       SetShellVarContext all
-      CreateShortCut "$DESKTOP\${APPLICATION_NAME}.lnk" "$INSTDIR\${APPLICATION_EXECUTABLE}" "" "$INSTDIR\nextcloud.ico" 0
+      CreateShortCut "$DESKTOP\${APPLICATION_NAME}.lnk" "$INSTDIR\${APPLICATION_EXECUTABLE}" "" "$INSTDIR\${APPLICATION_NAME}.ico" 0
       SetShellVarContext current
    ${MementoSectionEnd}
 !endif
@@ -501,7 +505,7 @@ SectionGroup $SectionGroup_Shortcuts
       DetailPrint $OPTION_SECTION_SC_QUICK_LAUNCH_DetailPrint
       SetShellVarContext all
       SetDetailsPrint listonly
-      CreateShortCut "$QUICKLAUNCH\${APPLICATION_NAME}.lnk" "$INSTDIR\${APPLICATION_EXECUTABLE}" "" "$INSTDIR\nextcloud.ico" 0
+      CreateShortCut "$QUICKLAUNCH\${APPLICATION_NAME}.lnk" "$INSTDIR\${APPLICATION_EXECUTABLE}" "" "$INSTDIR\${APPLICATION_NAME}.ico" 0
       SetShellVarContext current
    ${MementoSectionEnd}
 !endif
