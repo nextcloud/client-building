@@ -194,6 +194,22 @@ echo "* copy optional extra resources (dll's, etc.) from %EXTRA_DEPLOY_PATH%/."
 if %ERRORLEVEL% neq 0 goto onError
 :skipDeployExtra
 
+Rem VC Environment Variables
+echo "** Calling vcvars64.bat to get the VC env vars:"
+call "%VCINSTALLDIR%\Auxiliary\Build\vcvars64.bat"
+
+Rem VC Redist
+echo "* copy VC Redist Runtime DLLs from %VCToolsRedistDir%/."
+if "%BUILD_ARCH%" == "Win64" (
+    start "copy VC Redist x64" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x64/Microsoft.VC142.CRT/"* "%MY_COLLECT_PATH%/"
+) else (
+    start "copy VC Redist x86" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x86/Microsoft.VC142.CRT/"* "%MY_COLLECT_PATH%/"
+)
+if %ERRORLEVEL% neq 0 goto onError
+
+echo "* remove VC Redist installer(s) from %MY_COLLECT_PATH%/."
+start "remove vc*redist*.exe" /D "%MY_COLLECT_PATH%/" /B /wait rm -f "%MY_COLLECT_PATH%"/vc*redist*.exe
+
 Rem ******************************************************************************************
 rem 			"code signing"
 Rem ******************************************************************************************
@@ -201,8 +217,7 @@ Rem ****************************************************************************
 if "%USE_CODE_SIGNING%" == "0" (
     echo "** Don't sign: Code signing is disabled by USE_CODE_SIGNING"
 ) else (
-    echo "** Calling vcvars64.bat to add signtool to the PATH:"
-    call "%VCINSTALLDIR%\Auxiliary\Build\vcvars64.bat"
+    echo "** Trying to find signtool in the PATH (VC env vars):"
 
     for %%i in (signtool.exe) do @set SIGNTOOL=%%~$PATH:i
 

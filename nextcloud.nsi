@@ -324,15 +324,16 @@ Function EnsureOwncloudShutdown
    !insertmacro CheckAndConfirmEndProcess "${APPLICATION_EXECUTABLE}"
 FunctionEnd
 
-Function InstallRedistributables
-   ${If} ${RunningX64}
-      ExecWait '"$OUTDIR\vc_redist.x64.exe" /install /quiet /norestart'
-   ${Else}
-      ExecWait '"$OUTDIR\vc_redist.x86.exe" /install /quiet /norestart'
-   ${EndIf}
-   Delete "$OUTDIR\vc_redist.x86.exe"
-   Delete "$OUTDIR\vc_redist.x64.exe"
-FunctionEnd
+;Redist DLLs now already deployed in installation dir and shellext statically linked
+;Function InstallRedistributables
+;   ${If} ${RunningX64}
+;      ExecWait '"$OUTDIR\vc_redist.x64.exe" /install /quiet /norestart'
+;   ${Else}
+;      ExecWait '"$OUTDIR\vc_redist.x86.exe" /install /quiet /norestart'
+;   ${EndIf}
+;   Delete "$OUTDIR\vc_redist.x86.exe"
+;   Delete "$OUTDIR\vc_redist.x64.exe"
+;FunctionEnd
 
 ##############################################################################
 #                                                                            #
@@ -446,7 +447,7 @@ SectionEnd
       DetailPrint $OPTION_SECTION_SC_SHELL_EXT_DetailPrint
       ;File "${VCREDISTPATH}\vcredist_x86.exe"  ;now collected by windeployqt
       ;File "${VCREDISTPATH}\vcredist_x64.exe"  ;now collected by windeployqt
-      Call InstallRedistributables
+      ;Call InstallRedistributables             ;Redist DLLs now already deployed in installation dir and shellext statically linked
       CreateDirectory "$INSTDIR\shellext"
       !define LIBRARY_COM
       !define LIBRARY_SHELL_EXTENSION
