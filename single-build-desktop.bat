@@ -62,6 +62,7 @@ rem 			"check for required environment variables"
 Rem ******************************************************************************************
 
 call :testEnv APP_NAME
+call :testEnv USE_BRANDING
 call :testEnv PROJECT_PATH
 call :testEnv BUILD_TYPE
 call :testEnv BUILD_ARCH
@@ -161,6 +162,22 @@ if "%BUILD_TYPE%" == "Debug" (
 ) else (
     set WINDEPLOYQT_BUILD_TYPE=release
 )
+
+if "%USE_BRANDING%" == "1" (
+     start "mv nextcloud" /B  /wait mv "%MY_INSTALL_PATH%/bin/nextcloud.exe" "%MY_INSTALL_PATH%/bin/%APP_NAME%.exe"
+     start "mv nextcloudcmd" /B  /wait mv "%MY_INSTALL_PATH%/bin/nextcloudcmd.exe" "%MY_INSTALL_PATH%/bin/%APP_NAME%cmd.exe"	 
+     if exist "%MY_INSTALL_PATH%/bin/nextcloud/" (
+	    start "mkdir " /B /wait "%WIN_GIT_PATH%\usr\bin\mkdir.exe" -p "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%/"
+		start "mv bin files" /B /wait mv "%MY_INSTALL_PATH%/bin/nextcloud/"* "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%/"
+		start "rm folder" /B /wait rm -drf "%MY_INSTALL_PATH%/bin/nextcloud/"
+	    start "mkdir %MY_INSTALL_PATH%/config/%APP_NAME%/" /B /wait "%WIN_GIT_PATH%\usr\bin\mkdir.exe" -p "%MY_INSTALL_PATH%/config/%APP_NAME%/"
+		start "mv config files" /B  /wait mv "%MY_INSTALL_PATH%/config/nextcloud/"* "%MY_INSTALL_PATH%/config/%APP_NAME%/"
+		start "rm folder" /B /wait rm -drf "%MY_INSTALL_PATH%/config/nextcloud/"
+     )		
+)
+
+if %ERRORLEVEL% neq 0 goto onError
+
 echo "* Run windeployqt to collect all %APP_NAME%.exe dependencies and output it to %MY_QT_DEPLOYMENT_PATH%/."
 start "windeployqt" /B /wait windeployqt.exe --%WINDEPLOYQT_BUILD_TYPE% --compiler-runtime "%MY_INSTALL_PATH%/bin/%APP_NAME%.exe" --dir "%MY_QT_DEPLOYMENT_PATH%/" --qmldir "%MY_REPO%/src/gui"
 if %ERRORLEVEL% neq 0 goto onError
