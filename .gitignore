@@ -9,3 +9,4 @@ install/
 libs/
 qtkeychain/
 zlib/
+.vscode/
