@@ -2,6 +2,12 @@
 
 This allows you to easily build the desktop client for 64-bit and 32-bit Windows.
 
+## Update: 2020-08-21
+
+Build support for NC 3.0:
+- Shell extensions changed by: https://github.com/nextcloud/desktop/pull/2288
+- New client-building branches to ease building: stable-2.5, stable-2.6, stable-3.0
+
 ## Update: 2020-07-22
 
 Upgrade / new default version:
@@ -315,14 +321,11 @@ OR:
   for them or they're critical for security and privacy:
   - all the binaries we produce:
     - nextcloud/ocsync.dll
-    - shellext/OCContextMenu.dll
-    - shellext/OCOverlays.dll
-    - shellext/OCUtil.dll
+    - shellext/NCContextMenu.dll
+    - shellext/NCOverlays.dll
     - nextcloud.exe
     - nextcloudcmd.exe
     - nextcloudsync.dll
-    - OCContextMenu.dll
-    - OCOverlays.dll
     - ocsync.dll
     - OCUtil.dll
     - qt5keychain.dll
