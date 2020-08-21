@@ -119,16 +119,12 @@ start "copy ocsync.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PAT
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem shell extension dll's for Explorer integration (status icons)
-echo "* copy OCContextMenu.dll to %MY_COLLECT_PATH%/shellext/."
-start "copy OCContextMenu.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/OCContextMenu.dll" "%MY_COLLECT_PATH%/shellext/"
+echo "* move NCContextMenu.dll to %MY_COLLECT_PATH%/shellext/."
+start "move NCContextMenu.dll" /D "%MY_COLLECT_PATH%/" /B /wait mv -f "%MY_COLLECT_PATH%/NCContextMenu.dll" "%MY_COLLECT_PATH%/shellext/"
 if %ERRORLEVEL% neq 0 goto onError
 
-echo "* copy OCContextMenu.dll to %MY_COLLECT_PATH%/shellext/."
-start "copy OCOverlays.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/OCOverlays.dll" "%MY_COLLECT_PATH%/shellext/"
-if %ERRORLEVEL% neq 0 goto onError
-
-echo "* copy OCUtil.dll to %MY_COLLECT_PATH%/shellext/."
-start "copy OCUtil.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/OCUtil.dll" "%MY_COLLECT_PATH%/shellext/"
+echo "* move NCOverlays.dll to %MY_COLLECT_PATH%/shellext/."
+start "move NCOverlays.dll" /D "%MY_COLLECT_PATH%/" /B /wait mv -f "%MY_COLLECT_PATH%/NCOverlays.dll" "%MY_COLLECT_PATH%/shellext/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem exclude system file list
@@ -221,16 +217,12 @@ if "%USE_CODE_SIGNING%" == "0" (
 
     for %%G in (
             "%APP_NAME_SANITIZED%/ocsync.dll"
-            "shellext/OCContextMenu.dll"
-            "shellext/OCOverlays.dll"
-            "shellext/OCUtil.dll"
+            "shellext/NCContextMenu.dll"
+            "shellext/NCOverlays.dll"
             "%APP_NAME_SANITIZED%.exe"
             "%APP_NAME_SANITIZED%cmd.exe"
             "%APP_NAME_SANITIZED%sync.dll"
-            "OCContextMenu.dll"
-            "OCOverlays.dll"
             "ocsync.dll"
-            "OCUtil.dll"
             "qt5keychain.dll"
             "%LIBCRYPTO_DLL_FILENAME%"
             "%LIBSSL_DLL_FILENAME%"
