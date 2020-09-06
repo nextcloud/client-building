@@ -2,6 +2,13 @@
 
 This allows you to easily build the desktop client for 64-bit and 32-bit Windows.
 
+## Update: 2020-09-08
+
+MSI build support:
+- Will be available with NC 3.0.2 and up
+- Install the WiX Toolset build tools: https://wixtoolset.org/releases/
+- Set: `BUILD_INSTALLER_MSI=1`
+
 ## Update: 2020-08-21
 
 Build support for NC 3.0:
@@ -158,6 +165,12 @@ Optional:
 ## NSIS plugins to install
 - [ ] https://nsis.sourceforge.io/UAC_plug-in
 - [ ] https://nsis.sourceforge.io/NsProcess_plugin
+
+## To build MSI installers:
+- Above NSIS is not required, without NSIS set: `BUILD_INSTALLER=0`
+- MSI is available with NC 3.0.2 and up
+- Install the WiX Toolset build tools: https://wixtoolset.org/releases/
+- Set: `BUILD_INSTALLER_MSI=1`
 
 ## To upload builds
 - https://success.tanaza.com/s/article/How-to-use-SCP-command-on-Windows
