@@ -86,6 +86,15 @@ if %ERRORLEVEL% neq 0 goto onError
 Rem Note: Signing and upload of the installer is triggered by NSIS. see: nextcloud.nsi
 
 
+if "%BUILD_INSTALLER_MSI%" == "0" (
+    echo "** Don't build the MSI installer (disabled by BUILD_INSTALLER_MSI)"
+) else (
+    echo "***** build the MSI installer."
+    start "build-installer-msi.bat %BUILD_TYPE%" /D "%PROJECT_PATH%/" /B /wait "%~dp0/build-installer-msi.bat" %BUILD_TYPE%
+)
+if %ERRORLEVEL% neq 0 goto onError
+
+
 Rem ******************************************************************************************
 
 echo "***** Build finished. (%~nx0)"
