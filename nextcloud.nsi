@@ -222,7 +222,17 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${VERSION}"
       StrCmp $LANGUAGE ${LANG_POLISH} Polish 0
       StrCmp $LANGUAGE ${LANG_TURKISH} Turkish 0
       StrCmp $LANGUAGE ${LANG_NORWEGIAN} Norwegian 0
-      StrCmp $LANGUAGE ${LANG_PORTUGUESEBR} Brazilian EndLanguageCmp
+      StrCmp $LANGUAGE ${LANG_PORTUGUESEBR} Brazilian 0
+      StrCmp $LANGUAGE ${LANG_CATALAN} Catalan 0
+      StrCmp $LANGUAGE ${LANG_FARSI} Farsi 0
+      StrCmp $LANGUAGE ${LANG_FRENCH} French 0
+      StrCmp $LANGUAGE ${LANG_HUNGARIAN} Hungarian 0
+      StrCmp $LANGUAGE ${LANG_PORTUGUESE} Portuguese 0
+      StrCmp $LANGUAGE ${LANG_RUSSIAN} Russian 0
+      StrCmp $LANGUAGE ${LANG_SIMPCHINESE} SimpChinese 0
+      StrCmp $LANGUAGE ${LANG_SWEDISH} Swedish 0
+      StrCmp $LANGUAGE ${LANG_THAI} Thai 0
+      StrCmp $LANGUAGE ${LANG_UKRAINIAN} Ukrainian EndLanguageCmp
       German:
       !include "${source_path}/admin/win/nsi/l10n\German.nsh"
       Goto EndLanguageCmp
@@ -267,6 +277,36 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${VERSION}"
       Goto EndLanguageCmp
       Norwegian:
       !include "${source_path}/admin/win/nsi/l10n\Norwegian.nsh"
+      Goto EndLanguageCmp
+      Catalan:
+      !include "${source_path}/admin/win/nsi/l10n\Catalan.nsh"
+      Goto EndLanguageCmp
+      Farsi:
+      !include "${source_path}/admin/win/nsi/l10n\Farsi.nsh"
+      Goto EndLanguageCmp
+      French:
+      !include "${source_path}/admin/win/nsi/l10n\French.nsh"
+      Goto EndLanguageCmp
+      Hungarian:
+      !include "${source_path}/admin/win/nsi/l10n\Hungarian.nsh"
+      Goto EndLanguageCmp
+      Portuguese:
+      !include "${source_path}/admin/win/nsi/l10n\Portuguese.nsh"
+      Goto EndLanguageCmp
+      Russian:
+      !include "${source_path}/admin/win/nsi/l10n\Russian.nsh"
+      Goto EndLanguageCmp
+      SimpChinese:
+      !include "${source_path}/admin/win/nsi/l10n\SimpChinese.nsh"
+      Goto EndLanguageCmp
+      Swedish:
+      !include "${source_path}/admin/win/nsi/l10n\Swedish.nsh"
+      Goto EndLanguageCmp
+      Thai:
+      !include "${source_path}/admin/win/nsi/l10n\Thai.nsh"
+      Goto EndLanguageCmp
+      Ukrainian:
+      !include "${source_path}/admin/win/nsi/l10n\Ukrainian.nsh"
       EndLanguageCmp:
 
    FunctionEnd
