@@ -1,5 +1,7 @@
 ;Nextcloud installer script.
 
+Unicode true
+
 !define APPLICATION_SHORTNAME "nextcloud"
 !define APPLICATION_NAME "Nextcloud"
 !define APPLICATION_VENDOR "$%APPLICATION_VENDOR%"
