@@ -108,8 +108,13 @@ echo "* Run cmake to compile and install."
 start "cmake build" /D "%MY_BUILD_PATH%" /B /wait cmake --build . --config %BUILD_TYPE% --target install
 if %ERRORLEVEL% neq 0 goto onError
 
-echo "* Copy qt5keychain.dll to %QT_BIN_PATH%/ for windeployqt to find it."
-start "copy qt5keychain.dll for windeployqt" /B /wait cp -f "%MY_INSTALL_PATH%/bin/qt5keychain.dll" "%QT_BIN_PATH%/"
+if "%BUILD_TYPE%" == "Debug" (
+    echo "* Copy qt5keychaind.dll to %QT_BIN_PATH%/ for windeployqt to find it."
+	start "copy qt5keychaind.dll for windeployqt" /B /wait cp -f "%MY_INSTALL_PATH%/bin/qt5keychaind.dll" "%QT_BIN_PATH%/"
+) else (
+    echo "* Copy qt5keychain.dll to %QT_BIN_PATH%/ for windeployqt to find it."
+    start "copy qt5keychain.dll for windeployqt" /B /wait cp -f "%MY_INSTALL_PATH%/bin/qt5keychain.dll" "%QT_BIN_PATH%/"
+)
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem ******************************************************************************************
