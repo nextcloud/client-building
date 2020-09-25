@@ -32,6 +32,8 @@ echo "* TAG %TAG%"
 echo "* PULL_QTKEYCHAIN %PULL_QTKEYCHAIN%"
 echo "* CHECKOUT_QTKEYCHAIN %CHECKOUT_QTKEYCHAIN%"
 
+echo "* DLL_SUFFIX=%DLL_SUFFIX%"
+
 echo "* MY_REPO=%MY_REPO%"
 echo "* MY_BUILD_PATH=%MY_BUILD_PATH%"
 echo "* MY_INSTALL_PATH=%MY_INSTALL_PATH%"
@@ -108,13 +110,8 @@ echo "* Run cmake to compile and install."
 start "cmake build" /D "%MY_BUILD_PATH%" /B /wait cmake --build . --config %BUILD_TYPE% --target install
 if %ERRORLEVEL% neq 0 goto onError
 
-if "%BUILD_TYPE%" == "Debug" (
-    echo "* Copy qt5keychaind.dll to %QT_BIN_PATH%/ for windeployqt to find it."
-	start "copy qt5keychaind.dll for windeployqt" /B /wait cp -f "%MY_INSTALL_PATH%/bin/qt5keychaind.dll" "%QT_BIN_PATH%/"
-) else (
-    echo "* Copy qt5keychain.dll to %QT_BIN_PATH%/ for windeployqt to find it."
-    start "copy qt5keychain.dll for windeployqt" /B /wait cp -f "%MY_INSTALL_PATH%/bin/qt5keychain.dll" "%QT_BIN_PATH%/"
-)
+echo "* Copy qt5keychain%DLL_SUFFIX%.dll to %QT_BIN_PATH%/ for windeployqt to find it."
+start "copy qt5keychain%DLL_SUFFIX%.dll for windeployqt" /B /wait cp -f "%MY_INSTALL_PATH%/bin/qt5keychain%DLL_SUFFIX%.dll" "%QT_BIN_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem ******************************************************************************************
