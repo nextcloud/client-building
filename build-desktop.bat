@@ -24,7 +24,7 @@ for %%G in (%BUILD_TARGETS%) do (
     set ZLIB_PATH=%PROJECT_PATH%/libs/%BUILD_TYPE%/zlib/%%G
 
     set QTKEYCHAIN_INCLUDE_DIR=!QTKEYCHAIN_PATH!/include/qt5keychain
-    set QTKEYCHAIN_LIBRARY=!QTKEYCHAIN_PATH!/lib/qt5keychain.lib
+    set QTKEYCHAIN_LIBRARY=!QTKEYCHAIN_PATH!/lib/qt5keychain!DLL_SUFFIX!.lib
     set OPENSSL_INCLUDE_DIR=!OPENSSL_ROOT_DIR!/include
     set OPENSSL_LIBRARIES=!OPENSSL_ROOT_DIR!/lib
     set ZLIB_INCLUDE_DIR=!ZLIB_PATH!/include
