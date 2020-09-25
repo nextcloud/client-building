@@ -101,7 +101,7 @@ Rem Note: Force the use Git Bash's mkdir.exe, usually found in C:\Program Files\
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem Qt dependencies
-echo "* copy Qt libs (including qt5keychain.dll)."
+echo "* copy Qt libs (including qt5keychain%DLL_SUFFIX%.dll)."
 start "copy Qt libs" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/qt-libs/"* "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
@@ -238,7 +238,7 @@ if "%USE_CODE_SIGNING%" == "0" (
             "%APP_NAME_SANITIZED%cmd.exe"
             "%APP_NAME_SANITIZED%sync.dll"
             "ocsync.dll"
-            "qt5keychain.dll"
+            "qt5keychain%DLL_SUFFIX%.dll"
             "%LIBCRYPTO_DLL_FILENAME%"
             "%LIBSSL_DLL_FILENAME%"
             "zlib%DLL_SUFFIX%.dll"
