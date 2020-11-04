@@ -797,7 +797,7 @@ Function .onInit
       ${EndSwitch}
 
    ;Prevent multiple instances.
-   System::Call 'kernel32::CreateMutexA(i 0, i 0, t "${APPLICATION_SHORTNAME}Installer") i .r1 ?e'
+   System::Call 'kernel32::CreateMutexW(i 0, i 0, t "${APPLICATION_SHORTNAME}Installer") i .r1 ?e'
    Pop $R0
    StrCmp $R0 0 +3
       MessageBox MB_OK|MB_ICONEXCLAMATION $INIT_INSTALLER_RUNNING
@@ -876,7 +876,7 @@ Function un.onInit
       ${EndSwitch}
 
    ;Prevent multiple instances.
-   System::Call 'kernel32::CreateMutexA(i 0, i 0, t "${APPLICATION_SHORTNAME}Uninstaller") i .r1 ?e'
+   System::Call 'kernel32::CreateMutexW(i 0, i 0, t "${APPLICATION_SHORTNAME}Uninstaller") i .r1 ?e'
    Pop $R0
    StrCmp $R0 0 +3
       MessageBox MB_OK|MB_ICONEXCLAMATION $INIT_UNINSTALLER_RUNNING
