@@ -572,6 +572,9 @@ Section -post
          StrCpy $showInExplorerNavigationPane "false"
       ${EndIf}
 
+      ;check for AppData\Local config file for older clients before create a new config folder
+      ;the client will handle the migration to AppData\Roaming on the first run
+      IfFileExists "$LOCALAPPDATA\${APPLICATION_NAME}\${APPLICATION_CONFIG_FILE}" 0 +1
       CreateDirectory "$APPDATA\${APPLICATION_NAME}"
 
       SetShellVarContext all
