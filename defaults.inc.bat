@@ -75,7 +75,7 @@ if "%BUILD_DATE%" == "" (
 if "%VERSION_SUFFIX%" == ""                 set VERSION_SUFFIX=daily
 
 Rem Git tags for checkout
-if "%TAG_QTKEYCHAIN%" == ""                 set TAG_QTKEYCHAIN=master
+if "%TAG_QTKEYCHAIN%" == ""                 set TAG_QTKEYCHAIN=v0.10.0
 if "%TAG_ZLIB%" == ""                       set TAG_ZLIB=master
 
 Rem Desktop Client (master for daily build or e.g.: stable-2.5.3)
