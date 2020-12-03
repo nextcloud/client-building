@@ -111,7 +111,7 @@ start "cmake build" /D "%MY_BUILD_PATH%" /B /wait cmake --build . --config %BUIL
 if %ERRORLEVEL% neq 0 goto onError
 
 echo "* go back to master: git checkout master at %MY_REPO%/."
-start "git checkout master /D "%MY_REPO%/" /B /wait git checkout master
+start "git checkout master" /D "%MY_REPO%/" /B /wait git checkout master
 
 echo "* Copy qt5keychain%DLL_SUFFIX%.dll to %QT_BIN_PATH%/ for windeployqt to find it."
 start "copy qt5keychain%DLL_SUFFIX%.dll for windeployqt" /B /wait cp -f "%MY_INSTALL_PATH%/bin/qt5keychain%DLL_SUFFIX%.dll" "%QT_BIN_PATH%/"
