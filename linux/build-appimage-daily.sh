@@ -10,18 +10,18 @@ useradd user -u ${1:-1000}
 mkdir /app
 mkdir /build
 
-#Set Qt-5.11
-export QT_BASE_DIR=/opt/qt511
+#Set Qt-5.12
+export QT_BASE_DIR=/opt/qt5.12.9
 export QTDIR=$QT_BASE_DIR
 export PATH=$QT_BASE_DIR/bin:$PATH
 export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
 export PKG_CONFIG_PATH=$QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 
-#QtKeyChain 0.8.0
+#QtKeyChain 0.10.0
 cd /build
 git clone https://github.com/frankosterfeld/qtkeychain.git
 cd qtkeychain
-git checkout v0.8.0
+git checkout v0.10.0
 mkdir build
 cd build
 cmake -D CMAKE_INSTALL_PREFIX=/usr ../
@@ -35,6 +35,7 @@ mkdir build-client
 cd build-client
 cmake -D CMAKE_INSTALL_PREFIX=/usr \
     -D NO_SHIBBOLETH=1 \
+    -D BUILD_UPDATER=ON \
     -D QTKEYCHAIN_LIBRARY=/app/usr/lib/x86_64-linux-gnu/libqt5keychain.so \
     -D QTKEYCHAIN_INCLUDE_DIR=/app/usr/include/qt5keychain/ \
     -DMIRALL_VERSION_SUFFIX=daily \
@@ -62,11 +63,13 @@ rm -rf ./usr/share/caja-python/
 rm -rf ./usr/share/nautilus-python/
 rm -rf ./usr/share/nemo-python/
 
-# Move sync exlucde to right location
+# Move sync exclude to right location
 mv ./etc/Nextcloud/sync-exclude.lst ./usr/bin/
 rm -rf ./etc
 
-sed -i -e 's|Icon=nextcloud|Icon=Nextcloud|g' usr/share/applications/nextcloud.desktop # Bug in desktop file?
+# com.nextcloud.desktopclient.nextcloud.desktop
+DESKTOP_FILE=$(ls /app/usr/share/applications/*.desktop)
+sed -i -e 's|Icon=nextcloud|Icon=Nextcloud|g' ${DESKTOP_FILE} # Bug in desktop file?
 cp ./usr/share/icons/hicolor/512x512/apps/Nextcloud.png . # Workaround for linuxeployqt bug, FIXME
 
 
