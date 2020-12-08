@@ -26,7 +26,7 @@ mkdir build
 cd build
 cmake -D CMAKE_INSTALL_PREFIX=/usr ../
 make -j4
-make DESTDIR=/app install 
+make install 
 
 #Build client
 cd /build
@@ -90,13 +90,13 @@ chmod a+x linuxdeployqt*.AppImage
 rm ./linuxdeployqt-continuous-x86_64.AppImage
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/app/usr/lib/
-./squashfs-root/AppRun /app/usr/share/applications/nextcloud.desktop -bundle-non-qt-libs
+./squashfs-root/AppRun ${DESKTOP_FILE} -bundle-non-qt-libs
 
 # Set origin
 ./squashfs-root/usr/bin/patchelf --set-rpath '$ORIGIN/' /app/usr/lib/libnextcloudsync.so.0
 
 # Build AppImage
-./squashfs-root/AppRun /app/usr/share/applications/nextcloud.desktop -appimage
+./squashfs-root/AppRun ${DESKTOP_FILE} -appimage
 
 export VERSION_MAJOR=$(cat build-client/version.h | grep MIRALL_VERSION_MAJOR | cut -d ' ' -f 3)
 export VERSION_MINOR=$(cat build-client/version.h | grep MIRALL_VERSION_MINOR | cut -d ' ' -f 3)

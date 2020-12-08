@@ -12,7 +12,7 @@ docker run \
     --name desktop-$DATE \
     -v $DIR:/input \
     -v ~/output/$DATE:/output \
-    nextcloudci/client-5.11:client-5.11-3 \
+    nextcloudci/client-5.12:client-5.12-9 \
     /input/build-appimage-daily.sh $(id -u)
 
 #Save the logs!
