@@ -114,8 +114,8 @@ echo "* copy desktop client files (bin/)."
 start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/"* "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
-echo "* copy ocsync.dll."
-start "copy ocsync.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%/ocsync.dll" "%MY_COLLECT_PATH%/"
+echo "* copy %APP_NAME_SANITIZED%_csync.dll."
+start "copy %APP_NAME_SANITIZED%_csync.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem shell extension dll's for Explorer integration (status icons)
@@ -231,13 +231,13 @@ if "%USE_CODE_SIGNING%" == "0" (
     echo "** Code signing begins:"
 
     for %%G in (
-            "%APP_NAME_SANITIZED%/ocsync.dll"
+            "%APP_NAME_SANITIZED%/%APP_NAME_SANITIZED%_csync.dll"
             "shellext/NCContextMenu.dll"
             "shellext/NCOverlays.dll"
             "%APP_NAME_SANITIZED%.exe"
             "%APP_NAME_SANITIZED%cmd.exe"
             "%APP_NAME_SANITIZED%sync.dll"
-            "ocsync.dll"
+            "%APP_NAME_SANITIZED%_csync.dll"
             "qt5keychain%DLL_SUFFIX%.dll"
             "%LIBCRYPTO_DLL_FILENAME%"
             "%LIBSSL_DLL_FILENAME%"
