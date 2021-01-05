@@ -46,7 +46,7 @@ make DESTDIR=/app install
 # Move stuff around
 cd /app
 
-mv ./usr/lib/x86_64-linux-gnu/nextcloud/* ./usr/lib/x86_64-linux-gnu/
+mv ./usr/lib/x86_64-linux-gnu/libnextcloud*.* ./usr/lib/x86_64-linux-gnu/
 mv ./usr/lib/x86_64-linux-gnu/* ./usr/lib/
 rm -rf ./usr/lib/nextcloud
 rm -rf ./usr/lib/cmake
