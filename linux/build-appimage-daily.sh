@@ -34,6 +34,7 @@ git clone --depth 1 https://github.com/nextcloud/desktop.git
 mkdir build-client
 cd build-client
 cmake -D CMAKE_INSTALL_PREFIX=/usr \
+    -D BUILD_TESTING=OFF \
     -D BUILD_UPDATER=ON \
     -D QTKEYCHAIN_LIBRARY=/app/usr/lib/x86_64-linux-gnu/libqt5keychain.so \
     -D QTKEYCHAIN_INCLUDE_DIR=/app/usr/include/qt5keychain/ \
@@ -46,9 +47,7 @@ make DESTDIR=/app install
 # Move stuff around
 cd /app
 
-mv ./usr/lib/x86_64-linux-gnu/nextcloud/* ./usr/lib/x86_64-linux-gnu/
 mv ./usr/lib/x86_64-linux-gnu/* ./usr/lib/
-rm -rf ./usr/lib/nextcloud
 rm -rf ./usr/lib/cmake
 rm -rf ./usr/include
 rm -rf ./usr/mkspecs
@@ -89,7 +88,7 @@ chmod a+x linuxdeployqt*.AppImage
 rm ./linuxdeployqt-continuous-x86_64.AppImage
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/app/usr/lib/
-./squashfs-root/AppRun ${DESKTOP_FILE} -bundle-non-qt-libs
+./squashfs-root/AppRun ${DESKTOP_FILE} -bundle-non-qt-libs -qmldir=/build/desktop/src/gui
 
 # Set origin
 ./squashfs-root/usr/bin/patchelf --set-rpath '$ORIGIN/' /app/usr/lib/libnextcloudsync.so.0
