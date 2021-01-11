@@ -105,6 +105,11 @@ echo "* copy Qt libs (including qt5keychain%DLL_SUFFIX%.dll)."
 start "copy Qt libs" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/qt-libs/"* "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
+Rem Remove Qt bearer plugins, they seem to cause issues on Windows
+echo "* remove Qt bearer plugins"
+start "remove Qt bearer plugins" /D "%MY_COLLECT_PATH/" /B /wait rm -rf "%MY_COLLECT_PATH/bearer"
+if %ERRORLEVEL% neq 0 goto onError
+
 Rem Desktop Client and resources
 echo "* copy language files (i18n)."
 start "copy i18n" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/i18n" "%MY_COLLECT_PATH%/"
@@ -115,7 +120,7 @@ start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin
 if %ERRORLEVEL% neq 0 goto onError
 
 echo "* copy %APP_NAME_SANITIZED%_csync.dll."
-start "copy %APP_NAME_SANITIZED%_csync.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/"
+start "copy %APP_NAME_SANITIZED%_csync.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem shell extension dll's for Explorer integration (status icons)
