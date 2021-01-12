@@ -236,7 +236,6 @@ if "%USE_CODE_SIGNING%" == "0" (
     echo "** Code signing begins:"
 
     for %%G in (
-            "%APP_NAME_SANITIZED%/%APP_NAME_SANITIZED%_csync.dll"
             "shellext/NCContextMenu.dll"
             "shellext/NCOverlays.dll"
             "%APP_NAME_SANITIZED%.exe"
