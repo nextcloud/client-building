@@ -107,7 +107,7 @@ if %ERRORLEVEL% neq 0 goto onError
 
 Rem Remove Qt bearer plugins, they seem to cause issues on Windows
 echo "* remove Qt bearer plugins"
-start "remove Qt bearer plugins" /D "%MY_COLLECT_PATH/" /B /wait rm -rf "%MY_COLLECT_PATH/bearer"
+start "remove Qt bearer plugins" /D "%MY_COLLECT_PATH%/" /B /wait rm -rf "%MY_COLLECT_PATH%/bearer"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem Desktop Client and resources
