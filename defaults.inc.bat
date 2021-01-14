@@ -106,11 +106,11 @@ Rem Updater: ON = build, OFF = don't build (default)
 if "%BUILD_UPDATER%" == ""                  set BUILD_UPDATER=OFF
 
 Rem ************************************************************************************************************************************************************************************
-Rem Installer Options: 1 = build (default), 0 = don't build
-if "%BUILD_INSTALLER%" == ""                set BUILD_INSTALLER=1
+Rem Installer Options: 1 = build, 0 = don't build (default)
+if "%BUILD_INSTALLER%" == ""                set BUILD_INSTALLER=0
 
-Rem MSI installer: 1 = build, 0 = don't build (default)
-if "%BUILD_INSTALLER_MSI%" == ""            set BUILD_INSTALLER_MSI=0
+Rem MSI installer: 1 = build (default), 0 = don't build (default)
+if "%BUILD_INSTALLER_MSI%" == ""            set BUILD_INSTALLER_MSI=1
 
 if "%INSTALLER_OUTPUT_PATH%" == ""          set INSTALLER_OUTPUT_PATH=%PROJECT_PATH%/daily/
 
