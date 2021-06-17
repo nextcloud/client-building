@@ -2,8 +2,8 @@
 
 set -xe
 
-export CC=gcc-7
-export CXX=g++-7
+export CC=gcc-10
+export CXX=g++-10
 
 useradd user -u ${1:-1000}
 
@@ -11,7 +11,7 @@ mkdir /app
 mkdir /build
 
 #Set Qt-5.12
-export QT_BASE_DIR=/opt/qt5.12.9
+export QT_BASE_DIR=/opt/qt5.12.10
 export QTDIR=$QT_BASE_DIR
 export PATH=$QT_BASE_DIR/bin:$PATH
 export LD_LIBRARY_PATH=$QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRARY_PATH
