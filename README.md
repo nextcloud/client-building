@@ -2,6 +2,10 @@
 
 This allows you to easily build the desktop client for 64-bit and 32-bit Windows.
 
+## Updaate: 2021-06-24
+Upgrade / new default version:
+- Qt 5.12.10
+
 ## Update: 2020-09-08
 
 MSI build support:
@@ -132,7 +136,7 @@ Optional:
 - [ ] Git bash (it comes with Git):
       https://git-scm.com/download/win
 
-- [ ] Qt 5.12.9 (select in the wizard: MSVC 2017 64-bit AND 32-bit and all the "Qt ..." options, not required: Debug Info Files):
+- [ ] Qt 5.12.10 (select in the wizard: MSVC 2017 64-bit AND 32-bit and all the "Qt ..." options, not required: Debug Info Files):
       http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
 
       Install to: C:\Qt
@@ -155,7 +159,7 @@ Optional:
       - 64-bit: C:\OpenSSL\Win64
       - 32-bit: C:\OpenSSL\Win32
 
-    Note: Qt 5.12.9 also includes the option to install OpenSSL 1.1.1 libraries from the Maintenance tool wizard.
+    Note: Qt 5.12.10 also includes the option to install OpenSSL 1.1.1 libraries from the Maintenance tool wizard.
           You may also use these libraries instead of the ones above but then you have to modify the paths in defaults.inc.bat
           and be sure to check for updates on a regular basis!
 
