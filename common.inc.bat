@@ -16,8 +16,8 @@ if	"%VS_VERSION%" == "2017"		set CMAKE_GENERATOR=Visual Studio 15 2017
 if	"%VS_VERSION%" == "2019"		set CMAKE_GENERATOR=Visual Studio 16 2019
 								
 set CMAKE_GENERATOR_PLATFORM=x64								
-set QT_BIN_PATH=%QT_PATH%/msvc2017_64/bin
-set QT_PREFIX=%QT_PATH%/msvc2017_64
+set QT_BIN_PATH=%QT_PATH%/msvc%VS_VERSION%_64/bin
+set QT_PREFIX=%QT_PATH%/msvc%VS_VERSION%_64
 set QTKEYCHAIN_PREFIX=%PROJECT_PATH%/libs/%BUILD_TYPE%/qtkeychain/Win64
 
 if "%~2" == "Win32" (set BUILD_ARCH=%~2)
@@ -30,8 +30,8 @@ if "%BUILD_ARCH%" == "Win32" (
 		set CMAKE_GENERATOR=Visual Studio 16 2019
 	)
 	set CMAKE_GENERATOR_PLATFORM=Win32
-    set QT_BIN_PATH=%QT_PATH%/msvc2017/bin
-	set QT_PREFIX=%QT_PATH%/msvc2017
+    set QT_BIN_PATH=%QT_PATH%/msvc%VS_VERSION%/bin
+	set QT_PREFIX=%QT_PATH%/msvc%VS_VERSION%
 	set QTKEYCHAIN_PREFIX=%PROJECT_PATH%/libs/%BUILD_TYPE%/qtkeychain/Win32
 )
 
