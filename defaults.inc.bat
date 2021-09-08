@@ -40,7 +40,7 @@ if "%OPENSSL_PATH%" == ""                   set OPENSSL_PATH=c:/OpenSSL
 
 if "%Png2Ico_EXECUTABLE%" == ""             set Png2Ico_EXECUTABLE=c:/Nextcloud/tools/png2ico.exe
 
-if "%VS_VERSION%" == ""                     set VS_VERSION=2019
+if "%VS_VERSION%" == ""                     set VS_VERSION=2017
 
 Rem Required for Qt's windeployqt to find the VC Redist Setup (and for auto-discovery of signtool.exe)
 if "%VCINSTALLDIR%" == "" (
