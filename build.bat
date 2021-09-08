@@ -27,6 +27,7 @@ call :testEnv PROJECT_PATH
 call :testEnv BUILD_TYPE
 call :testEnv BUILD_TARGETS
 call :testEnv QT_PATH
+call :testEnv QT_VS_VERSION
 call :testEnv OPENSSL_PATH
 call :testEnv Png2Ico_EXECUTABLE
 call :testEnv VS_VERSION
