@@ -33,7 +33,7 @@ if "%BUILD_TARGETS%" == ""                  set BUILD_TARGETS=Win64,Win32
 
 if "%PROJECT_PATH%" == ""                   set PROJECT_PATH=c:/Nextcloud/client-building
 
-if "%QT_PATH%" == ""                        set QT_PATH=d:/Qt/5.15.2
+if "%QT_PATH%" == ""                        set QT_PATH=c:/Qt/5.15.2
 if "%QT_VS_VERSION%" == ""                  set QT_VS_VERSION=2019
 
                                             set PATH=c:/Nextcloud/tools/cmake/bin;c:/Nextcloud/tools;C:/Program Files (x86)/NSIS;%PATH%
