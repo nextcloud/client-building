@@ -1,6 +1,5 @@
 *.kdev4
 key/
-daily/
 logs/
 collect/
 deploy-extra/
