@@ -4,7 +4,7 @@ set -xe
 
 VERSION_SUFFIX=daily
 
-PROJECT_DIR=/Users/admin/daily
+PROJECT_DIR=$(pwd)
 QT_DIR=/usr/local/Qt-5.15.2
 OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
 OSX_DEPLOYMENT_TARGET=10.12
@@ -33,7 +33,7 @@ mkdir install
 
 #Build QtKeychain
 mkdir qtkeychain
-cd qtkeychain
+cd $PROJECT_DIR/build/qtkeychain
 
 cmake \
         -DCMAKE_OSX_SYSROOT=$OSX_SYSROOT \
