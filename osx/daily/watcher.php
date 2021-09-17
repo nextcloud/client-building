@@ -2,9 +2,9 @@
 
 // Time to sleep between checks
 $sleeptime = 60;
+
 // Command to run
-//$command = '/Users/builder/daily/build.sh';
-$command = '/Users/admin/daily/build.sh';
+$command = './build.sh';
 
 $latestBuild = 0;
 if (file_exists('latest')) {
