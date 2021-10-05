@@ -119,8 +119,8 @@ echo "* copy desktop client files (bin/)."
 start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/"* "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
-echo "* copy %APP_NAME_SANITIZED%_csync.dll."
-start "copy %APP_NAME_SANITIZED%_csync.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/"
+echo "* copy %APP_NAME%_csync.dll."
+start "copy %APP_NAME%_csync.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/%APP_NAME%_csync.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem shell extension dll's for Explorer integration (status icons)
