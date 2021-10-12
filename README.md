@@ -132,12 +132,12 @@ Optional:
 - [ ] Git bash (it comes with Git):
       https://git-scm.com/download/win
 
-- [ ] Qt 5.12.9 (select in the wizard: MSVC 2017 64-bit AND 32-bit and all the "Qt ..." options, not required: Debug Info Files):
+- [ ] Qt 5.15.2 (select in the wizard: MSVC 2019 64-bit AND 32-bit and all the "Qt ..." options, not required: Debug Info Files):
       http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe
 
       Install to: C:\Qt
 
-  Note: MSVC 2017 is binary compatible with VS 2019, so don't be confused ;-)
+  Note: See `QT_PATH` in [](defaults.inc.bat) for currently used version. Then set: `QT_PATH=c:/Qt/5.15.2` (adjust version as needed) 
 
 - [ ] CMake 3.14.x (choose the ZIP version, extract and rename to: C:\Nextcloud\tools\cmake):
       https://cmake.org/download/
@@ -158,6 +158,9 @@ Optional:
     Note: Qt 5.12.9 also includes the option to install OpenSSL 1.1.1 libraries from the Maintenance tool wizard.
           You may also use these libraries instead of the ones above but then you have to modify the paths in defaults.inc.bat
           and be sure to check for updates on a regular basis!
+
+- [ ] Inkscape (make sure to select option to add to `%PATH%` during installation):
+      https://inkscape.org/release/
 
 ## NSIS (Nullsoft Scriptable Install System)
 - Install NSIS: https://nsis.sourceforge.io/Download/
@@ -238,7 +241,7 @@ build the client at any time later:
 
 - To build Release, collect all files but build no installer, don't sign and don't upload:
   ```
-  BUILD_INSTALLER=0 USE_CODE_SIGNING=0 UPLOAD_BUILD=0 ./build.bat Release
+  BUILD_INSTALLER=0 USE_CODE_SIGNING=0 UPLOAD_BUILD=0 QT_PATH=c:/Qt/5.15.2 ./build.bat Release
   ```
 
 ## Explanation of the build scripts
