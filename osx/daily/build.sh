@@ -39,6 +39,7 @@ cmake \
         -DCMAKE_OSX_SYSROOT=$OSX_SYSROOT \
         -DCMAKE_OSX_DEPLOYMENT_TARGET=$OSX_DEPLOYMENT_TARGET \
         -DCMAKE_INSTALL_PREFIX=$PROJECT_DIR/build/install \
+        -DBUILD_OWNCLOUD_OSX_BUNDLE=ON \
         -DCMAKE_PREFIX_PATH=$QT_DIR \
         -DQT_TRANSLATIONS_DIR=$PROJECT_DIR/build/install/translations/ \
         $PROJECT_DIR/qtkeychain/
