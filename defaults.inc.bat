@@ -128,7 +128,7 @@ if "%P12_KEY%" == ""                        set P12_KEY=%PROJECT_PATH%\key\%APPL
 if "%P12_KEY_PASSWORD%" == ""               set P12_KEY_PASSWORD=
 
 if "%SIGN_FILE_DIGEST_ALG%" == ""           set SIGN_FILE_DIGEST_ALG=sha256
-if "%SIGN_TIMESTAMP_URL%" == ""             set SIGN_TIMESTAMP_URL=http://tsa.swisssign.net
+if "%SIGN_TIMESTAMP_URL%" == ""             set SIGN_TIMESTAMP_URL=http://timestamp.sectigo.com
 if "%SIGN_TIMESTAMP_DIGEST_ALG%" == ""      set SIGN_TIMESTAMP_DIGEST_ALG=sha256
 
 Rem ************************************************************************************************************************************************************************************
