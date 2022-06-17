@@ -139,7 +139,7 @@ Optional:
 
   Note: See `QT_PATH` in [](defaults.inc.bat) for currently used version. Then set: `QT_PATH=c:/Qt/5.15.2` (adjust version as needed) 
 
-- [ ] CMake 3.14.x (choose the ZIP version, extract and rename to: C:\Nextcloud\tools\cmake):
+- [ ] CMake 3.16.x (choose the ZIP version, extract and rename to: C:\Nextcloud\tools\cmake):
       https://cmake.org/download/
 
 - [ ] Png2Icon - you need to use this version: https://download.nextcloud.com/desktop/development/Windows/tools/png2ico.exe
@@ -155,7 +155,7 @@ Optional:
       - 64-bit: C:\OpenSSL\Win64
       - 32-bit: C:\OpenSSL\Win32
 
-    Note: Qt 5.12.9 also includes the option to install OpenSSL 1.1.1 libraries from the Maintenance tool wizard.
+    Note: Qt 5.15.2 also includes the option to install OpenSSL 1.1.1 libraries from the Maintenance tool wizard.
           You may also use these libraries instead of the ones above but then you have to modify the paths in defaults.inc.bat
           and be sure to check for updates on a regular basis!
 
