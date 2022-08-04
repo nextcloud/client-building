@@ -79,10 +79,14 @@ cp -P -r /usr/lib/x86_64-linux-gnu/nss ./usr/lib/
 
 # Use linuxdeployqt to deploy
 cd /build
-wget --ca-directory=/etc/ssl/certs -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-chmod a+x linuxdeployqt*.AppImage
-./linuxdeployqt-continuous-x86_64.AppImage --appimage-extract
-rm ./linuxdeployqt-continuous-x86_64.AppImage
+# Use version '8' of linuxdeployqt, the latest version break libsecret support
+# See https://github.com/probonopd/linuxdeployqt/issues/544
+#LINUXDEPLOYQT_VERSION="continuous"
+LINUXDEPLOYQT_VERSION="8"
+wget -O linuxdeployqt.AppImage --ca-directory=/etc/ssl/certs -c "https://github.com/probonopd/linuxdeployqt/releases/download/${LINUXDEPLOYQT_VERSION}/linuxdeployqt-continuous-x86_64.AppImage"
+chmod a+x linuxdeployqt.AppImage
+./linuxdeployqt.AppImage --appimage-extract
+rm ./linuxdeployqt.AppImage
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/app/usr/lib/
 ./squashfs-root/AppRun ${DESKTOP_FILE} -bundle-non-qt-libs -qmldir=/build/desktop/src/gui
