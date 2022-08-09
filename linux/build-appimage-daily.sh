@@ -79,10 +79,12 @@ cp -P -r /usr/lib/x86_64-linux-gnu/nss ./usr/lib/
 
 # Use linuxdeployqt to deploy
 cd /build
-wget --ca-directory=/etc/ssl/certs -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-chmod a+x linuxdeployqt*.AppImage
-./linuxdeployqt-continuous-x86_64.AppImage --appimage-extract
-rm ./linuxdeployqt-continuous-x86_64.AppImage
+LINUXDEPLOYQT_VERSION="continuous"
+wget -O linuxdeployqt.AppImage --ca-directory=/etc/ssl/certs -c "https://github.com/probonopd/linuxdeployqt/releases/download/${LINUXDEPLOYQT_VERSION}/linuxdeployqt-continuous-x86_64.AppImage"
+chmod a+x linuxdeployqt.AppImage
+./linuxdeployqt.AppImage --appimage-extract
+rm ./linuxdeployqt.AppImage
+cp -r ./squashfs-root ./linuxdeployqt-squashfs-root
 unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/app/usr/lib/
 ./squashfs-root/AppRun ${DESKTOP_FILE} -bundle-non-qt-libs -qmldir=/build/desktop/src/gui
@@ -92,6 +94,15 @@ export LD_LIBRARY_PATH=/app/usr/lib/
 
 # Build AppImage
 ./squashfs-root/AppRun ${DESKTOP_FILE} -appimage
+
+# Workaround issue #103
+rm -rf ./squashfs-root
+APPIMAGE=$(ls Nextcloud*.AppImage)
+"./${APPIMAGE}" --appimage-extract
+rm "./${APPIMAGE}"
+rm ./squashfs-root/usr/lib/libglib-2.0.so.0
+rm ./squashfs-root/usr/lib/libgobject-2.0.so.0
+PATH=./linuxdeployqt-squashfs-root/usr/bin:$PATH appimagetool -n ./squashfs-root "$APPIMAGE"
 
 export VERSION_MAJOR=$(cat build-client/version.h | grep MIRALL_VERSION_MAJOR | cut -d ' ' -f 3)
 export VERSION_MINOR=$(cat build-client/version.h | grep MIRALL_VERSION_MINOR | cut -d ' ' -f 3)
