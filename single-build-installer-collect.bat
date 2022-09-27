@@ -56,6 +56,7 @@ call :testEnv BUILD_ARCH
 call :testEnv WIN_GIT_PATH
 call :testEnv OPENSSL_ROOT_DIR
 call :testEnv ZLIB_PATH
+call :testEnv KARCHIVE_PATH
 call :testEnv EXTRA_DEPLOY_PATH
 
 if "%USE_CODE_SIGNING%" == "1" (
@@ -186,6 +187,12 @@ Rem also copy e.g.: %OPENSSL_ROOT_DIR%/bin/msvcr120.dll
 Rem zlib
 echo "* copy zlib%DLL_SUFFIX%.dll."
 start "copy zlib%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%ZLIB_PATH%/bin/zlib%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
+if %ERRORLEVEL% neq 0 goto onError
+
+Rem KF5Archive
+echo "* copy KF5Archive%DLL_SUFFIX%.dll."
+echo "KARCHIVE_PATH_DLL: %KARCHIVE_PATH%/KF5Archive%DLL_SUFFIX%.dll"
+start "copy KARCHIVE_PATH%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%KARCHIVE_PATH%/KF5Archive%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem deploy-extra: optional extra dll's and other resources
