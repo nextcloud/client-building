@@ -21,7 +21,7 @@ for %%G in (%BUILD_TARGETS%) do (
 
     set OPENSSL_ROOT_DIR=%OPENSSL_PATH%/%%G
     set ZLIB_PATH=%PROJECT_PATH%/libs/%BUILD_TYPE%/zlib/%%G
-	set KARCHIVE_PATH=%PROJECT_PATH%/karchive/build/bin/%BUILD_TYPE%/%%G
+	set KARCHIVE_PATH=C:\Program Files (x86)\ECM\bin\
 	
 	echo "PROJECT_PATH: %PROJECT_PATH%"
 	echo "KARCHIVE_PATH: %KARCHIVE_PATH%"
