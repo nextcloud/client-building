@@ -189,7 +189,7 @@ start "copy zlib%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%ZLIB
 if %ERRORLEVEL% neq 0 goto
 
 echo "* copy KArchive files (bin/)."
-start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "C:\Program Files (x86)\ECM\bin\"* "%MY_COLLECT_PATH%/"
+start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "C:/Program Files (x86)/ECM/bin/"* "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem deploy-extra: optional extra dll's and other resources
