@@ -95,8 +95,8 @@ rem Reference: https://ss64.com/nt/setlocal.html
 rem Reference: https://ss64.com/nt/start.html
 
 Rem Output path for collected files
-echo "* mkdir %MY_COLLECT_PATH%/shellext (recursive)."
-start "mkdir collect" /D "%MY_INSTALL_PATH%/" /B /wait "%WIN_GIT_PATH%\usr\bin\mkdir.exe" -p "%MY_COLLECT_PATH%/shellext"
+echo "* mkdir %MY_COLLECT_PATH%"
+start "mkdir collect" /D "%MY_INSTALL_PATH%/" /B /wait "%WIN_GIT_PATH%\usr\bin\mkdir.exe" -p "%MY_COLLECT_PATH%"
 Rem Note: Force the use Git Bash's mkdir.exe, usually found in C:\Program Files\Git\usr\bin
 if %ERRORLEVEL% neq 0 goto onError
 
@@ -121,15 +121,6 @@ if %ERRORLEVEL% neq 0 goto onError
 
 echo "* copy %APP_NAME_SANITIZED%_csync.dll."
 start "copy %APP_NAME_SANITIZED%_csync.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/bin/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/"
-if %ERRORLEVEL% neq 0 goto onError
-
-Rem shell extension dll's for Explorer integration (status icons)
-echo "* move NCContextMenu.dll to %MY_COLLECT_PATH%/shellext/."
-start "move NCContextMenu.dll" /D "%MY_COLLECT_PATH%/" /B /wait mv -f "%MY_COLLECT_PATH%/NCContextMenu.dll" "%MY_COLLECT_PATH%/shellext/"
-if %ERRORLEVEL% neq 0 goto onError
-
-echo "* move NCOverlays.dll to %MY_COLLECT_PATH%/shellext/."
-start "move NCOverlays.dll" /D "%MY_COLLECT_PATH%/" /B /wait mv -f "%MY_COLLECT_PATH%/NCOverlays.dll" "%MY_COLLECT_PATH%/shellext/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem exclude system file list
@@ -240,8 +231,8 @@ if "%USE_CODE_SIGNING%" == "0" (
     echo "** Code signing begins:"
 
     for %%G in (
-            "shellext/NCContextMenu.dll"
-            "shellext/NCOverlays.dll"
+            "NCContextMenu.dll"
+            "NCOverlays.dll"
             "%APP_NAME_SANITIZED%.exe"
             "%APP_NAME_SANITIZED%cmd.exe"
             "%APP_NAME_SANITIZED%sync.dll"
