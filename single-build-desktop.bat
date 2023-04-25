@@ -71,6 +71,9 @@ call :testEnv TAG
 
 if %ERRORLEVEL% neq 0 goto onError
 
+if "%BUILD_ARCH%" == "Win64" ( call "%VCINSTALLDIR%\Auxiliary\Build\vcvarsall.bat" x64 )
+if "%BUILD_ARCH%" == "Win32" ( call "%VCINSTALLDIR%\Auxiliary\Build\vcvarsall.bat" amd64_x86 )
+
 Rem ******************************************************************************************
 rem 			"Test run?"
 Rem ******************************************************************************************
