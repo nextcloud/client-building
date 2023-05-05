@@ -14,7 +14,7 @@ rem QT msvc2017 is still the latest because it actually works for both (2019 com
 set "BUILD_ARCH=Win64"
 set "CMAKE_GENERATOR=Ninja"
 
-set "CRAFT_PATH=c:\Craft64"
+set "CRAFT_PATH=d:\Craft64"
 set "QT_PATH=%CRAFT_PATH%"
 set "PATH=%CRAFT_PATH%\bin;%CRAFT_PATH%\dev-utils\bin;%PATH%"
 set "QT_BIN_PATH=%CRAFT_PATH%\bin"
@@ -23,7 +23,7 @@ set "QT_PREFIX=%CRAFT_PATH%"
 if "%~2" == "Win32" (set "BUILD_ARCH=%~2")
 
 if "%BUILD_ARCH%" == "Win32" (
-    set "CRAFT_PATH=c:\Craft32"
+    set "CRAFT_PATH=d:\Craft32"
     set "QT_PATH=%CRAFT_PATH%"
     set "PATH=%CRAFT_PATH%\bin;%CRAFT_PATH%\dev-utils\bin;%PATH%"
     set "QT_BIN_PATH=%CRAFT_PATH%\bin"
