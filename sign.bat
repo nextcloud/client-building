@@ -10,9 +10,9 @@ call "%~dp0/defaults.inc.bat"
 
 Rem ******************************************************************************************
 
-echo "*** Sign file: %~1%."
+echo "*** Sign file: %~1"
 
-if "%1" == "" (
+if "%~1" == "" (
     echo "Missing parameter: Please specify file to sign"
     exit 1
 )
@@ -86,17 +86,17 @@ Rem ****************************************************************************
 rem Reference: https://ss64.com/nt/setlocal.html
 rem Reference: https://ss64.com/nt/start.html
 
-echo "* Run signtool on file: %~1%."
+echo "* Run signtool on file: %~1"
 start "signtool" /D "%PROJECT_PATH%" /B /wait "%SIGNTOOL%" sign /debug /v /n "%APPLICATION_VENDOR%" /tr "%SIGN_TIMESTAMP_URL%" /td %SIGN_TIMESTAMP_DIGEST_ALG% /fd %SIGN_FILE_DIGEST_ALG% /f "%P12_KEY%" /p "%P12_KEY_PASSWORD%" "%~1"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem ******************************************************************************************
 
-echo "*** Finished sign file: %~1%"
+echo "*** Finished sign file: %~1"
 exit 0
 
 :onError
-echo "*** Sign FAILED for file: %~1%"
+echo "*** Sign FAILED for file: %~1"
 if %ERRORLEVEL% neq 0 exit %ERRORLEVEL%
 if !ERRORLEVEL! neq 0 exit !ERRORLEVEL!
 exit 1

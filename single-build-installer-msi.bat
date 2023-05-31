@@ -17,11 +17,11 @@ echo "**** Build installer-msi for %BUILD_TYPE% %BUILD_ARCH% (%~nx0)."
 
 Rem ******************************************************************************************
 
-set MY_REPO=%PROJECT_PATH%/desktop
-set MY_BUILD_PATH=%MY_REPO%/build
-set MY_INSTALL_PATH=%PROJECT_PATH%/install/%BUILD_TYPE%/%BUILD_ARCH%
-set MY_COLLECT_PATH=%PROJECT_PATH%/collect/%BUILD_TYPE%/%BUILD_ARCH%
-set MY_MSI_PATH=%MY_INSTALL_PATH%/msi
+set "MY_REPO=%PROJECT_PATH%/desktop"
+set "MY_BUILD_PATH=%MY_REPO%/build"
+set "MY_INSTALL_PATH=%PROJECT_PATH%/install/%BUILD_TYPE%/%BUILD_ARCH%"
+set "MY_COLLECT_PATH=%PROJECT_PATH%/collect/%BUILD_TYPE%/%BUILD_ARCH%"
+set "MY_MSI_PATH=%MY_INSTALL_PATH%/msi"
 
 echo "* BUILD_TYPE=%BUILD_TYPE%"
 echo "* BUILD_ARCH=%BUILD_ARCH%"
@@ -79,9 +79,9 @@ if not exist "%INSTALLER_OUTPUT_PATH%" (
 if %ERRORLEVEL% neq 0 goto onError
 
 if "%BUILD_ARCH%" == "Win32" (
-    set BITNESS=32
+    set "BITNESS=32"
 ) else (
-    set BITNESS=64
+    set "BITNESS=64"
 )
 
 Rem VC Environment Variables
@@ -97,7 +97,7 @@ if "%USE_CODE_SIGNING%" == "0" (
 ) else (
     echo "** Trying to find signtool in the PATH (VC env vars):"
 
-    for %%i in (signtool.exe) do @set SIGNTOOL=%%~$PATH:i
+    for %%i in (signtool.exe) do @set "SIGNTOOL=%%~$PATH:i"
 
     if "!SIGNTOOL!" == "" (
         echo "** Unable to find signtool.exe in the PATH."
@@ -124,8 +124,8 @@ start "make-msi.bat" /D "%MY_MSI_PATH%" /B /wait call make-msi.bat "%MY_COLLECT_
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem Find MSI, get filename
-for /f %%a in ('dir /b "%MY_MSI_PATH%"\*.msi') do (
-    set MSI_FILENAME=%%a
+for /f "delims=" %%a in ('dir /b "%MY_MSI_PATH%"\*.msi') do (
+    set "MSI_FILENAME=%%a"
 )
 
 if "%USE_CODE_SIGNING%" == "0" (
