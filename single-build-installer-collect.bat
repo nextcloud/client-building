@@ -12,11 +12,11 @@ call "%~dp0/common.inc.bat" %1 %2
 
 Rem ******************************************************************************************
 
-set MY_REPO=%PROJECT_PATH%/desktop
-set MY_BUILD_PATH=%MY_REPO%/build
-set MY_INSTALL_PATH=%PROJECT_PATH%/install/%BUILD_TYPE%/%BUILD_ARCH%
-set MY_QT_DEPLOYMENT_PATH=%MY_INSTALL_PATH%/qt-libs
-set MY_COLLECT_PATH=%PROJECT_PATH%/collect/%BUILD_TYPE%/%BUILD_ARCH%
+set "MY_REPO=%PROJECT_PATH%/desktop"
+set "MY_BUILD_PATH=%MY_REPO%/build"
+set "MY_INSTALL_PATH=%PROJECT_PATH%/install/%BUILD_TYPE%/%BUILD_ARCH%"
+set "MY_QT_DEPLOYMENT_PATH=%MY_INSTALL_PATH%/qt-libs"
+set "MY_COLLECT_PATH=%PROJECT_PATH%/collect/%BUILD_TYPE%/%BUILD_ARCH%"
 
 echo "* APP_NAME=%APP_NAME%"
 echo "* APP_NAME_SANITIZED=%APP_NAME_SANITIZED%"
