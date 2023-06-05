@@ -33,6 +33,13 @@ if "%BUILD_TARGETS%" == ""                  set BUILD_TARGETS=Win64,Win32
 
 if "%PROJECT_PATH%" == ""                   set PROJECT_PATH=c:/Nextcloud/client-building
 
+if "%QT_PATH%" == ""                        set QT_PATH=d:/Qt/5.15.2
+if "%QT_VS_VERSION%" == ""                  set QT_VS_VERSION=2019
+
+                                            set PATH=c:/Nextcloud/tools/cmake/bin;c:/Nextcloud/tools;C:/Program Files (x86)/NSIS;%PATH%
+
+if "%OPENSSL_PATH%" == ""                   set OPENSSL_PATH=c:/OpenSSL
+
 if "%Png2Ico_EXECUTABLE%" == ""             set Png2Ico_EXECUTABLE=c:/Nextcloud/tools/png2ico.exe
 
 if "%VS_VERSION%" == ""                     set VS_VERSION=2019
@@ -70,6 +77,9 @@ if "%BUILD_DATE%" == "" (
 if "%VERSION_SUFFIX%" == ""                 set VERSION_SUFFIX=daily
 
 Rem Git tags for checkout
+if "%TAG_QTKEYCHAIN%" == ""                 set TAG_QTKEYCHAIN=v0.10.0
+if "%TAG_ZLIB%" == ""                       set TAG_ZLIB=master
+
 Rem Desktop Client (master for daily build or e.g.: stable-2.5.3)
 Rem You may query the available tags with "git tag" within ./desktop
 if "%TAG_DESKTOP%" == ""                    set TAG_DESKTOP=master
@@ -77,9 +87,15 @@ if "%TAG_DESKTOP%" == ""                    set TAG_DESKTOP=master
 Rem ************************************************************************************************************************************************************************************
 
 Rem Git pull defaults
+if "%PULL_QTKEYCHAIN%" == ""                set PULL_QTKEYCHAIN=1
+if "%PULL_ZLIB%" == ""                      set PULL_ZLIB=1
+
 if "%PULL_DESKTOP%" == ""                   set PULL_DESKTOP=1
 
 Rem Git checkout defaults
+if "%CHECKOUT_QTKEYCHAIN%" == ""            set CHECKOUT_QTKEYCHAIN=1
+if "%CHECKOUT_ZLIB%" == ""                  set CHECKOUT_ZLIB=1
+
 if "%CHECKOUT_DESKTOP%" == ""               set CHECKOUT_DESKTOP=1
 
 Rem Branding overrides
@@ -129,6 +145,9 @@ if "%SFTP_USER%" == ""                      set SFTP_USER=
 
 Rem ************************************************************************************************************************************************************************************
 Rem CMake extra build flags (optional)
+
+if "%CMAKE_EXTRA_FLAGS_QTKEYCHAIN%" == ""   set CMAKE_EXTRA_FLAGS_QTKEYCHAIN=
+if "%CMAKE_EXTRA_FLAGS_ZLIB%" == ""         set CMAKE_EXTRA_FLAGS_ZLIB=
 
 Rem Here you may define special flags for the Desktop build, e.g. the Update Server URL
 Rem ( -DAPPLICATION_UPDATE_URL="https://your.url" ). see: desktop/build/config.h and version.h
