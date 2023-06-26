@@ -96,16 +96,6 @@ start "mkdir collect" /D "%MY_INSTALL_PATH%/" /B /wait "%WIN_GIT_PATH%\usr\bin\m
 Rem Note: Force the use Git Bash's mkdir.exe, usually found in C:\Program Files\Git\usr\bin
 if %ERRORLEVEL% neq 0 goto onError
 
-Rem Qt dependencies
-echo "* copy Qt libs (including qt5keychain%DLL_SUFFIX%.dll)."
-start "copy Qt libs" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/qt-libs/"* "%MY_COLLECT_PATH%/"
-if %ERRORLEVEL% neq 0 goto onError
-
-Rem Remove Qt bearer plugins, they seem to cause issues on Windows
-echo "* remove Qt bearer plugins"
-start "remove Qt bearer plugins" /D "%MY_COLLECT_PATH%/" /B /wait rm -rf "%MY_COLLECT_PATH%/bearer"
-if %ERRORLEVEL% neq 0 goto onError
-
 Rem Desktop Client and resources
 echo "* copy language files (i18n)."
 start "copy i18n" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_INSTALL_PATH%/i18n" "%MY_COLLECT_PATH%/"
@@ -132,6 +122,19 @@ if exist "%MY_BUILD_PATH%/src/gui/%APP_NAME_SANITIZED%.ico" (
     echo "  NOT FOUND - try to copy installer.ico to %APP_NAME_SANITIZED%.ico"
     start "copy installer.ico to %APP_NAME_SANITIZED%.ico" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_REPO%/admin/win/nsi/installer.ico" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.ico"
 )
+if %ERRORLEVEL% neq 0 goto onError
+
+echo "* run windeployqt "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.exe."
+start "run windeployqt" /D "%MY_COLLECT_PATH%/" /B /wait windeployqt --compiler-runtime --qmldir "%MY_REPO%\src" --angle --release --force --verbose 2 "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%cmd.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%sync.dll"
+if %ERRORLEVEL% neq 0 goto onError
+
+Rem Remove Qt bearer plugins, they seem to cause issues on Windows
+echo "* remove Qt bearer plugins"
+start "remove Qt bearer plugins" /D "%MY_COLLECT_PATH%/" /B /wait rm -rf "%MY_COLLECT_PATH%/bearer"
+if %ERRORLEVEL% neq 0 goto onError
+
+echo "* copy Qt dependencies."
+start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/freetype%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem Qt config file for correct deployment
@@ -165,18 +168,13 @@ echo "* copy %CRAFT_PATH%/bin/%LIBSSL_DLL_FILENAME%."
 start "copy %LIBSSL_DLL_FILENAME%" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/%LIBSSL_DLL_FILENAME%" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
-Rem The current Win**OpenSSL-1_1_1* is built with VC 2017 runtime dependencies,
-Rem so we don't need to copy from there any more.
-Rem However, if a future version of libcrypto requires a different VC runtime,
-Rem also copy e.g.: %CRAFT_PATH%/bin/msvcr120.dll
-
 Rem zlib
 echo "* copy zlib1%DLL_SUFFIX%.dll."
 start "copy zlib1%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/zlib1%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto
 
 echo "* copy KArchive files (bin/)."
-start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF5Archive%DLL_SUFFIX%.dll"* "%MY_COLLECT_PATH%/"
+start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF5Archive%DLL_SUFFIX%.dll"* "%CRAFT_PATH%/bin/libbzip2%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/liblzma%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/zstd%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/pcre2-16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/libpng16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/harfbuzz%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem deploy-extra: optional extra dll's and other resources
