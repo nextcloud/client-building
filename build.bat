@@ -26,12 +26,33 @@ Rem ****************************************************************************
 call :testEnv PROJECT_PATH
 call :testEnv BUILD_TYPE
 call :testEnv BUILD_TARGETS
+call :testEnv QT_PATH
+call :testEnv QT_VS_VERSION
+call :testEnv OPENSSL_PATH
 call :testEnv Png2Ico_EXECUTABLE
 call :testEnv VS_VERSION
 call :testEnv VCINSTALLDIR
 call :testEnv WIN_GIT_PATH
 
 if %ERRORLEVEL% neq 0 goto onError
+
+Rem ******************************************************************************************
+rem 			"qtkeychain"
+Rem ******************************************************************************************
+
+echo "***** build qtkeychain."
+start "build-qtkeychain.bat %BUILD_TYPE%" /D "%PROJECT_PATH%/" /B /wait "%~dp0/build-qtkeychain.bat" %BUILD_TYPE%
+if %ERRORLEVEL% neq 0 goto onError
+
+
+Rem ******************************************************************************************
+rem 			"zlib"
+Rem ******************************************************************************************
+
+echo "***** build zlib."
+start "build-zlib.bat %BUILD_TYPE%" /D "%PROJECT_PATH%/" /B /wait "%~dp0/build-zlib.bat" %BUILD_TYPE%
+if %ERRORLEVEL% neq 0 goto onError
+
 
 Rem ******************************************************************************************
 rem 			"desktop"
