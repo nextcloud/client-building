@@ -19,9 +19,6 @@ for %%G in (%BUILD_TARGETS%) do (
         set "DLL_SUFFIX="
     )
 
-    set "OPENSSL_ROOT_DIR=%OPENSSL_PATH%/%%G"
-    set "ZLIB_PATH=%PROJECT_PATH%/libs/%BUILD_TYPE%/zlib/%%G"
-
     set "EXTRA_DEPLOY_PATH=%PROJECT_PATH%/deploy-extra/%BUILD_TYPE%/%%G"
 
     echo "**** collect installer files for %%G (%~nx0)."

@@ -28,8 +28,6 @@ echo "* PROJECT_PATH=%PROJECT_PATH%"
 echo "* WIN_GIT_PATH=%WIN_GIT_PATH%"
 echo "* VCINSTALLDIR=%VCINSTALLDIR%"
 
-echo "* OPENSSL_ROOT_DIR=%OPENSSL_ROOT_DIR%"
-echo "* ZLIB_PATH=%ZLIB_PATH%"
 echo "* EXTRA_DEPLOY_PATH=%EXTRA_DEPLOY_PATH%"
 
 echo "* DLL_SUFFIX=%DLL_SUFFIX%"
@@ -54,8 +52,6 @@ call :testEnv PROJECT_PATH
 call :testEnv BUILD_TYPE
 call :testEnv BUILD_ARCH
 call :testEnv WIN_GIT_PATH
-call :testEnv OPENSSL_ROOT_DIR
-call :testEnv ZLIB_PATH
 call :testEnv EXTRA_DEPLOY_PATH
 
 if "%USE_CODE_SIGNING%" == "1" (
@@ -144,43 +140,43 @@ start "copy qt.conf" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%MY_REPO%/admin/wi
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem OpenSSL's libcrypto: Be future-proof! ;)
-echo "* get libcrypto's dll filename from %OPENSSL_ROOT_DIR%/bin/."
-start "get libcrypto's dll filename" /D "%OPENSSL_ROOT_DIR%/bin/" /B /wait ls libcrypto*.dll > "%PROJECT_PATH%"/tmp
+echo "* get libcrypto's dll filename from %CRAFT_PATH%/bin/."
+start "get libcrypto's dll filename" /D "%CRAFT_PATH%/bin/" /B /wait ls libcrypto*.dll > "%PROJECT_PATH%"/tmp
 if %ERRORLEVEL% neq 0 goto onError
 set /p LIBCRYPTO_DLL_FILENAME= < "%PROJECT_PATH%"\tmp
 if %ERRORLEVEL% neq 0 goto onError
 del "%PROJECT_PATH%"\tmp
 echo "* LIBCRYPTO_DLL_FILENAME=%LIBCRYPTO_DLL_FILENAME%"
 
-echo "* copy %OPENSSL_ROOT_DIR%/bin/%LIBCRYPTO_DLL_FILENAME%."
-start "copy %LIBCRYPTO_DLL_FILENAME%" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%OPENSSL_ROOT_DIR%/bin/%LIBCRYPTO_DLL_FILENAME%" "%MY_COLLECT_PATH%/"
+echo "* copy %CRAFT_PATH%/bin/%LIBCRYPTO_DLL_FILENAME%."
+start "copy %LIBCRYPTO_DLL_FILENAME%" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/%LIBCRYPTO_DLL_FILENAME%" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem OpenSSL's libssl
-echo "* get libssl's dll filename from %OPENSSL_ROOT_DIR%/bin/."
-start "get libssl's dll filename" /D "%OPENSSL_ROOT_DIR%/bin/" /B /wait ls libssl*.dll > "%PROJECT_PATH%"/tmp
+echo "* get libssl's dll filename from %CRAFT_PATH%/bin/."
+start "get libssl's dll filename" /D "%CRAFT_PATH%/bin/" /B /wait ls libssl*.dll > "%PROJECT_PATH%"/tmp
 if %ERRORLEVEL% neq 0 goto onError
 set /p LIBSSL_DLL_FILENAME= < "%PROJECT_PATH%"\tmp
 if %ERRORLEVEL% neq 0 goto onError
 del "%PROJECT_PATH%"\tmp
 echo "* LIBSSL_DLL_FILENAME=%LIBSSL_DLL_FILENAME%"
 
-echo "* copy %OPENSSL_ROOT_DIR%/bin/%LIBSSL_DLL_FILENAME%."
-start "copy %LIBSSL_DLL_FILENAME%" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%OPENSSL_ROOT_DIR%/bin/%LIBSSL_DLL_FILENAME%" "%MY_COLLECT_PATH%/"
+echo "* copy %CRAFT_PATH%/bin/%LIBSSL_DLL_FILENAME%."
+start "copy %LIBSSL_DLL_FILENAME%" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/%LIBSSL_DLL_FILENAME%" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem The current Win**OpenSSL-1_1_1* is built with VC 2017 runtime dependencies,
 Rem so we don't need to copy from there any more.
 Rem However, if a future version of libcrypto requires a different VC runtime,
-Rem also copy e.g.: %OPENSSL_ROOT_DIR%/bin/msvcr120.dll
+Rem also copy e.g.: %CRAFT_PATH%/bin/msvcr120.dll
 
 Rem zlib
-echo "* copy zlib%DLL_SUFFIX%.dll."
-start "copy zlib%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%ZLIB_PATH%/bin/zlib%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
+echo "* copy zlib1%DLL_SUFFIX%.dll."
+start "copy zlib1%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/zlib1%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto
 
 echo "* copy KArchive files (bin/)."
-start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "C:/Program Files (x86)/ECM/bin/"* "%MY_COLLECT_PATH%/"
+start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF5Archive%DLL_SUFFIX%.dll"* "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem deploy-extra: optional extra dll's and other resources
@@ -240,7 +236,7 @@ if "%USE_CODE_SIGNING%" == "0" (
             "qt5keychain%DLL_SUFFIX%.dll"
             "%LIBCRYPTO_DLL_FILENAME%"
             "%LIBSSL_DLL_FILENAME%"
-            "zlib%DLL_SUFFIX%.dll"
+            "zlib1%DLL_SUFFIX%.dll"
         ) do (
             start "sign %%~G" /D "%PROJECT_PATH%/" /B /wait %~dp0/sign.bat "%MY_COLLECT_PATH%/%%~G"
 
