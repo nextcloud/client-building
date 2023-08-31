@@ -177,6 +177,11 @@ echo "* copy KArchive files (bin/)."
 start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF5Archive%DLL_SUFFIX%.dll"* "%CRAFT_PATH%/bin/libbzip2%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/liblzma%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/zstd%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/pcre2-16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/libpng16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/harfbuzz%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
+Rem sqlite
+echo "* copy libsqlite.dll"
+start "copy libsqlite.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/libsqlite.dll" "%MY_COLLECT_PATH%/"
+if %ERRORLEVEL% neq 0 goto
+
 Rem deploy-extra: optional extra dll's and other resources
 echo "* copy optional extra resources (dll's, etc.) from %EXTRA_DEPLOY_PATH%/."
 ( dir /b /a "%EXTRA_DEPLOY_PATH%" | findstr . ) > nul && (
