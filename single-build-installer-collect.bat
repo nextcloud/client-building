@@ -144,7 +144,7 @@ if %ERRORLEVEL% neq 0 goto onError
 
 Rem OpenSSL's libcrypto: Be future-proof! ;)
 echo "* get libcrypto's dll filename from %CRAFT_PATH%/bin/."
-start "get libcrypto's dll filename" /D "%CRAFT_PATH%/bin/" /B /wait ls libcrypto*.dll > "%PROJECT_PATH%"/tmp
+start "get libcrypto's dll filename" /D "%CRAFT_PATH%/bin/" /B /wait ls libcrypto-3*.dll > "%PROJECT_PATH%"/tmp
 if %ERRORLEVEL% neq 0 goto onError
 set /p LIBCRYPTO_DLL_FILENAME= < "%PROJECT_PATH%"\tmp
 if %ERRORLEVEL% neq 0 goto onError
@@ -157,7 +157,7 @@ if %ERRORLEVEL% neq 0 goto onError
 
 Rem OpenSSL's libssl
 echo "* get libssl's dll filename from %CRAFT_PATH%/bin/."
-start "get libssl's dll filename" /D "%CRAFT_PATH%/bin/" /B /wait ls libssl*.dll > "%PROJECT_PATH%"/tmp
+start "get libssl's dll filename" /D "%CRAFT_PATH%/bin/" /B /wait ls libssl-3*.dll > "%PROJECT_PATH%"/tmp
 if %ERRORLEVEL% neq 0 goto onError
 set /p LIBSSL_DLL_FILENAME= < "%PROJECT_PATH%"\tmp
 if %ERRORLEVEL% neq 0 goto onError
