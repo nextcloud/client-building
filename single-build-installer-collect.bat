@@ -177,6 +177,14 @@ echo "* copy KArchive files (bin/)."
 start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF5Archive%DLL_SUFFIX%.dll"* "%CRAFT_PATH%/bin/libbzip2%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/liblzma%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/zstd%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/pcre2-16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/libpng16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/harfbuzz%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
+echo "* copy brotlicommon.dll"
+start "copy brotlicommon.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/brotlicommon.dll" "%MY_COLLECT_PATH%/"
+if %ERRORLEVEL% neq 0 goto
+
+echo "* copy brotlidec.dll"
+start "copy brotlidec.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/brotlidec.dll" "%MY_COLLECT_PATH%/"
+if %ERRORLEVEL% neq 0 goto
+
 Rem sqlite
 echo "* copy libsqlite.dll"
 start "copy libsqlite.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/libsqlite.dll" "%MY_COLLECT_PATH%/"
