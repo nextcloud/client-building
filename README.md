@@ -139,7 +139,7 @@ Optional:
 
   Note: MSVC 2017 is binary compatible with VS 2019, so don't be confused ;-)
 
-- [ ] CMake 3.14.x (choose the ZIP version, extract and rename to: C:\Nextcloud\tools\cmake):
+- [ ] CMake 3.16.x (choose the ZIP version, extract and rename to: C:\Nextcloud\tools\cmake):
       https://cmake.org/download/
 
 - [ ] Png2Icon - you need to use this version: https://download.nextcloud.com/desktop/development/Windows/tools/png2ico.exe
