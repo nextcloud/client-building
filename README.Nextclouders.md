@@ -102,7 +102,6 @@ Host download.nextcloud.com
 
 ## ENV VARS TO SET
 - [ ] OPENSSL_PATH (openssl path installation)
-- [ ] P12_KEY_PASSWORD (certificate key password used to sign the installer)
 - [ ] PROJECT_PATH (nextcloud source code path)
 - [ ] QT_PATH (qt installation path)
 - [ ] SFTP_SERVER (server url)
