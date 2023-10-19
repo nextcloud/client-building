@@ -102,18 +102,17 @@ if "%INSTALLER_OUTPUT_PATH%" == ""          set INSTALLER_OUTPUT_PATH=%PROJECT_P
 
 Rem ************************************************************************************************************************************************************************************
 Rem Code Signing Options: 1 = enable (default), 0 = disable
-if "%USE_CODE_SIGNING%" == ""               set USE_CODE_SIGNING=1
+if "%USE_CODE_SIGNING%" == ""               set "USE_CODE_SIGNING=1"
 
 Rem Vendor Name: Used for signing, also used by the installer
-if "%APPLICATION_VENDOR%" == ""             set APPLICATION_VENDOR=Nextcloud GmbH
+if "%APPLICATION_VENDOR%" == ""             set "APPLICATION_VENDOR=Nextcloud GmbH"
 
 Rem PFX Key and Password - it may be a good idea to set the password outside (environment variables)
-if "%P12_KEY%" == ""                        set P12_KEY=%PROJECT_PATH%\key\%APPLICATION_VENDOR%.p12
-if "%P12_KEY_PASSWORD%" == ""               set P12_KEY_PASSWORD=
+if "%CERTIFICATE_HASH%" == ""               set "CERTIFICATE_HASH=9C81A764910FFF3D0B8BC1613EFD72CCF4828EC3"
 
-if "%SIGN_FILE_DIGEST_ALG%" == ""           set SIGN_FILE_DIGEST_ALG=sha256
-if "%SIGN_TIMESTAMP_URL%" == ""             set SIGN_TIMESTAMP_URL=http://timestamp.digicert.com
-if "%SIGN_TIMESTAMP_DIGEST_ALG%" == ""      set SIGN_TIMESTAMP_DIGEST_ALG=sha256
+if "%SIGN_FILE_DIGEST_ALG%" == ""           set "SIGN_FILE_DIGEST_ALG=sha256"
+if "%SIGN_TIMESTAMP_URL%" == ""             set "SIGN_TIMESTAMP_URL=http://timestamp.digicert.com"
+if "%SIGN_TIMESTAMP_DIGEST_ALG%" == ""      set "SIGN_TIMESTAMP_DIGEST_ALG=sha256"
 
 Rem ************************************************************************************************************************************************************************************
 Rem Upload build: 1 = enable (default), 0 = disable

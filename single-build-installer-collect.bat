@@ -57,8 +57,7 @@ call :testEnv EXTRA_DEPLOY_PATH
 if "%USE_CODE_SIGNING%" == "1" (
     call :testEnv VCINSTALLDIR
     call :testEnv APPLICATION_VENDOR
-    call :testEnv P12_KEY
-    call :testEnv P12_KEY_PASSWORD
+    call :testEnv CERTIFICATE_HASH
     call :testEnv SIGN_FILE_DIGEST_ALG
     call :testEnv SIGN_TIMESTAMP_URL
     call :testEnv SIGN_TIMESTAMP_DIGEST_ALG
