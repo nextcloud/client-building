@@ -85,6 +85,9 @@ start "mkdir zlib/build" /D "%PROJECT_PATH%/" /B /wait "%WIN_GIT_PATH%\usr\bin\m
 if %ERRORLEVEL% neq 0 goto onError
 
 
+echo "* git clone desktop %TAG_DESKTOP% at %PROJECT_PATH%/desktop/."
+start "git clone desktop %TAG_DESKTOP%" /B /wait git clone --depth=1 --branch=%TAG_DESKTOP% https://github.com/nextcloud/client %PROJECT_PATH%/desktop
+
 Rem ******************************************************************************************
 
 echo "***** Init finished. (%~nx0)"
