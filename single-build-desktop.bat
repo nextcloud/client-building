@@ -95,8 +95,8 @@ echo "* Remove old dependencies files %MY_QT_DEPLOYMENT_PATH% from previous buil
 start "rm -rf" /B /wait rm -rf "%MY_QT_DEPLOYMENT_PATH%/"*
 if %ERRORLEVEL% neq 0 goto onError
 
-echo "* Remove %MY_BUILD_PATH%/CMakeFiles from previous build."
-start "rm -rf" /B /wait rm -rf "%MY_BUILD_PATH%/"*
+echo "* Remove %MY_REPO% from previous build."
+start "rm -rf" /B /wait rm -rf "%MY_REPO%/"*
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem ******************************************************************************************
@@ -110,25 +110,21 @@ if "%PULL_DESKTOP%" == "1" (
     Rem Checkout master first to have it clean for git pull
     if "%CHECKOUT_DESKTOP%" == "1" (
         echo "* git checkout master at %MY_REPO%/."
-        start "git checkout master" /D "%MY_REPO%/" /B /wait git checkout master
+        start "git checkout master" /B /wait git clone --depth=1 --branch=%TAG% https://github.com/nextcloud/client %MY_REPO%
     )
     if !ERRORLEVEL! neq 0 goto onError
-
-    echo "* git pull master at %MY_REPO%/."
-    start "git pull master" /D "%MY_REPO%/" /B /wait git pull --tags origin master
+) else (
+    if "%CHECKOUT_DESKTOP%" == "1" (
+        echo "* git checkout %TAG% at %MY_REPO%/."
+        start "git checkout %TAG%" /B /wait git clone --depth=1 --branch=%TAG% https://github.com/nextcloud/client %MY_REPO%
+        if !ERRORLEVEL! neq 0 goto onError
+    )
+    if %ERRORLEVEL% neq 0 goto onError
 )
 if %ERRORLEVEL% neq 0 goto onError
 
-if "%CHECKOUT_DESKTOP%" == "1" (
-    echo "* git checkout %TAG% at %MY_REPO%/."
-    start "git checkout %TAG%" /D "%MY_REPO%/" /B /wait git checkout %TAG%
-    if !ERRORLEVEL! neq 0 goto onError
-
-    if "%PULL_DESKTOP%" == "1" (
-        echo "* git pull %TAG% at %MY_REPO%/."
-        start "git pull %TAG%" /D "%MY_REPO%/" /B /wait git pull
-    )
-)
+echo "* Create desktop build directory"
+start "mkdir %MY_BUILD_PATH%" /D "%PROJECT_PATH%/" /B /wait "%WIN_GIT_PATH%\usr\bin\mkdir.exe" -p "%MY_BUILD_PATH%"
 if %ERRORLEVEL% neq 0 goto onError
 
 echo "* save git HEAD commit hash from repo %MY_REPO%/."
