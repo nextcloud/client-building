@@ -95,8 +95,8 @@ echo "* Remove old dependencies files %MY_QT_DEPLOYMENT_PATH% from previous buil
 start "rm -rf" /B /wait rm -rf "%MY_QT_DEPLOYMENT_PATH%/"*
 if %ERRORLEVEL% neq 0 goto onError
 
-echo "* Remove %MY_REPO% from previous build."
-start "rm -rf" /B /wait rm -rf "%MY_REPO%/"*
+echo "* Remove %MY_BUILD_PATH% from previous build."
+start "rm -rf" /B /wait rm -rf "%MY_BUILD_PATH%/"*
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem ******************************************************************************************
@@ -109,12 +109,20 @@ rem Reference: https://ss64.com/nt/start.html
 if "%PULL_DESKTOP%" == "1" (
     Rem Checkout master first to have it clean for git pull
     if "%CHECKOUT_DESKTOP%" == "1" (
+        echo "* Remove %MY_REPO% from previous build."
+        start "rm -rf" /B /wait rm -rf "%MY_REPO%/"*
+        if %ERRORLEVEL% neq 0 goto onError
+
         echo "* git checkout master at %MY_REPO%/."
         start "git checkout master" /B /wait git clone --depth=1 --branch=%TAG% https://github.com/nextcloud/client %MY_REPO%
     )
     if !ERRORLEVEL! neq 0 goto onError
 ) else (
     if "%CHECKOUT_DESKTOP%" == "1" (
+        echo "* Remove %MY_REPO% from previous build."
+        start "rm -rf" /B /wait rm -rf "%MY_REPO%/"*
+        if %ERRORLEVEL% neq 0 goto onError
+
         echo "* git checkout %TAG% at %MY_REPO%/."
         start "git checkout %TAG%" /B /wait git clone --depth=1 --branch=%TAG% https://github.com/nextcloud/client %MY_REPO%
         if !ERRORLEVEL! neq 0 goto onError
