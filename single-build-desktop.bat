@@ -110,7 +110,7 @@ if "%PULL_DESKTOP%" == "1" (
     Rem Checkout master first to have it clean for git pull
     if "%CHECKOUT_DESKTOP%" == "1" (
         echo "* Remove %MY_REPO% from previous build."
-        start "rm -rf" /B /wait rm -rf "%MY_REPO%/"*
+        start "rm -rf" /B /wait rm -rf "%MY_REPO%/"
         if %ERRORLEVEL% neq 0 goto onError
 
         echo "* git checkout master at %MY_REPO%/."
