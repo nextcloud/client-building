@@ -24,7 +24,6 @@ echo "* PROJECT_PATH=%PROJECT_PATH%"
 echo "* SIGNTOOL=%SIGNTOOL%"
 echo "* VCINSTALLDIR=%VCINSTALLDIR%"
 echo "* APPLICATION_VENDOR=%APPLICATION_VENDOR%"
-echo "* CERTIFICATE_HASH=%CERTIFICATE_HASH%"
 echo "* SIGN_FILE_DIGEST_ALG=%SIGN_FILE_DIGEST_ALG%"
 echo "* SIGN_TIMESTAMP_URL=%SIGN_TIMESTAMP_URL%"
 echo "* SIGN_TIMESTAMP_DIGEST_ALG=%SIGN_TIMESTAMP_DIGEST_ALG%"
@@ -43,7 +42,10 @@ if "%USE_CODE_SIGNING%" == "0" (
 
 call :testEnv PROJECT_PATH
 call :testEnv APPLICATION_VENDOR
-call :testEnv CERTIFICATE_HASH
+call :testEnv CERTIFICATE_FILENAME
+call :testEnv CERTIFICATE_CSP
+call :testEnv CERTIFICATE_KEY_CONTAINER_NAME
+call :testEnv CERTIFICATE_PASSWORD
 call :testEnv SIGN_FILE_DIGEST_ALG
 call :testEnv SIGN_TIMESTAMP_URL
 call :testEnv SIGN_TIMESTAMP_DIGEST_ALG
@@ -86,7 +88,7 @@ rem Reference: https://ss64.com/nt/setlocal.html
 rem Reference: https://ss64.com/nt/start.html
 
 echo "* Run signtool on file: %~1"
-start "signtool" /D "%PROJECT_PATH%" /B /wait "%SIGNTOOL%" sign /debug /v /n "%APPLICATION_VENDOR%" /tr "%SIGN_TIMESTAMP_URL%" /td %SIGN_TIMESTAMP_DIGEST_ALG% /fd %SIGN_FILE_DIGEST_ALG% /sha1 "%CERTIFICATE_HASH%" "%~1"
+start "signtool" /D "%PROJECT_PATH%" /B /wait "%SIGNTOOL%" sign /debug /v /tr "%SIGN_TIMESTAMP_URL%" /td %SIGN_TIMESTAMP_DIGEST_ALG% /fd %SIGN_FILE_DIGEST_ALG% /f "%CERTIFICATE_FILENAME%" /csp "%CERTIFICATE_CSP%" /kc "[{{%CERTIFICATE_PASSWORD%}}]=%CERTIFICATE_KEY_CONTAINER_NAME%" "%~1"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem ******************************************************************************************

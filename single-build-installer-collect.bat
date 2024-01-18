@@ -57,7 +57,10 @@ call :testEnv EXTRA_DEPLOY_PATH
 if "%USE_CODE_SIGNING%" == "1" (
     call :testEnv VCINSTALLDIR
     call :testEnv APPLICATION_VENDOR
-    call :testEnv CERTIFICATE_HASH
+    call :testEnv CERTIFICATE_FILENAME
+    call :testEnv CERTIFICATE_CSP
+    call :testEnv CERTIFICATE_KEY_CONTAINER_NAME
+    call :testEnv CERTIFICATE_PASSWORD
     call :testEnv SIGN_FILE_DIGEST_ALG
     call :testEnv SIGN_TIMESTAMP_URL
     call :testEnv SIGN_TIMESTAMP_DIGEST_ALG
