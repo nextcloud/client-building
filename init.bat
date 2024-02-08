@@ -28,6 +28,7 @@ Rem ****************************************************************************
 call :testEnv PROJECT_PATH
 call :testEnv BUILD_TARGETS
 call :testEnv WIN_GIT_PATH
+call :testEnv CUSTOMIZATION_SERVICE
 
 if "%BUILD_INSTALLER%" == "1" (
     call :testEnv INSTALLER_OUTPUT_PATH
@@ -86,7 +87,12 @@ if %ERRORLEVEL% neq 0 goto onError
 
 
 echo "* git clone desktop %TAG_DESKTOP% at %PROJECT_PATH%/desktop/."
-start "git clone desktop %TAG_DESKTOP%" /B /wait git clone --depth=1 --branch=%TAG_DESKTOP% https://github.com/nextcloud/client %PROJECT_PATH%/desktop
+if "%CUSTOMIZATION_SERVICE%" == "true" (
+    set "GIT_CLONE_DEPTH="
+) else (
+    set "GIT_CLONE_DEPTH=--depth=1"
+)
+start "git clone desktop %TAG_DESKTOP%" /B /wait git clone %GIT_CLONE_DEPTH% --branch=%TAG_DESKTOP% https://github.com/nextcloud/client %PROJECT_PATH%/desktop
 
 Rem ******************************************************************************************
 
