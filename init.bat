@@ -87,7 +87,7 @@ if %ERRORLEVEL% neq 0 goto onError
 
 
 echo "* git clone desktop %TAG_DESKTOP% at %PROJECT_PATH%/desktop/."
-if "%CUSTOMIZATION_SERVICE%" == "true" (
+if "%CUSTOMIZATION_SERVICE%" == "1" (
     set "GIT_CLONE_DEPTH="
 ) else (
     set "GIT_CLONE_DEPTH=--depth=1"
