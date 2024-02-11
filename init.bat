@@ -93,6 +93,7 @@ if "%CUSTOMIZATION_SERVICE%" == "1" (
     set "GIT_CLONE_DEPTH=--depth=1"
 )
 start "git clone desktop %TAG_DESKTOP%" /B /wait git clone %GIT_CLONE_DEPTH% --branch=%TAG_DESKTOP% https://github.com/nextcloud/client %PROJECT_PATH%/desktop
+if %ERRORLEVEL% neq 0 goto onError
 
 Rem ******************************************************************************************
 
