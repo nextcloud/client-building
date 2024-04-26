@@ -11,7 +11,7 @@ if "%BUILD_ARCH%" == "Win32" ( set "PATH=%CRAFT_PATH%\bin;%CRAFT_PATH%\dev-utils
 if "%BUILD_ARCH%" == "Win32" ( set "QT_BIN_PATH=%CRAFT_PATH%\bin" )
 if "%BUILD_ARCH%" == "Win32" ( set "QT_PREFIX=%CRAFT_PATH%" )
 
-if "%BUILD_ARCH%" == "Win64" ( set "CRAFT_PATH=c:\Craft64" )
+if "%BUILD_ARCH%" == "Win64" ( set "CRAFT_PATH=c:\CraftQt6" )
 if "%BUILD_ARCH%" == "Win64" ( set "QT_PATH=%CRAFT_PATH%" )
 if "%BUILD_ARCH%" == "Win64" ( set "PATH=%CRAFT_PATH%\bin;%CRAFT_PATH%\dev-utils\bin;%PATH%" )
 if "%BUILD_ARCH%" == "Win64" ( set "QT_BIN_PATH=%CRAFT_PATH%\bin" )

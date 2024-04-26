@@ -127,7 +127,7 @@ if exist "%MY_BUILD_PATH%/src/gui/%APP_NAME_SANITIZED%.ico" (
 if %ERRORLEVEL% neq 0 goto onError
 
 echo "* run windeployqt "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.exe."
-start "run windeployqt" /D "%MY_COLLECT_PATH%/" /B /wait windeployqt --compiler-runtime --qmldir "%MY_REPO%\src" --angle --release --force --verbose 2 "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%cmd.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%sync.dll"
+start "run windeployqt" /D "%MY_COLLECT_PATH%/" /B /wait windeployqt --compiler-runtime --qmldir "%MY_REPO%\src" --release --force --verbose 2 "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%cmd.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%sync.dll"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem Remove Qt bearer plugins, they seem to cause issues on Windows
@@ -180,7 +180,7 @@ start "copy zlib1%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRA
 if %ERRORLEVEL% neq 0 goto
 
 echo "* copy KArchive files (bin/)."
-start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF5Archive%DLL_SUFFIX%.dll"* "%CRAFT_PATH%/bin/libbzip2%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/liblzma%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/zstd%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/pcre2-16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/libpng16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/harfbuzz%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
+start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF6Archive%DLL_SUFFIX%.dll"* "%CRAFT_PATH%/bin/libbzip2%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/liblzma%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/zstd%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/pcre2-16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/libpng16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/harfbuzz%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 echo "* copy brotlicommon.dll"
@@ -214,9 +214,9 @@ call "%VCINSTALLDIR%\Auxiliary\Build\vcvars64.bat"
 Rem VC Redist
 echo "* copy VC Redist Runtime DLLs from %VCToolsRedistDir%/."
 if "%BUILD_ARCH%" == "Win64" (
-    start "copy VC Redist x64" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x64/Microsoft.VC142.CRT/"* "%MY_COLLECT_PATH%/"
+    start "copy VC Redist x64" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x64/Microsoft.VC143.CRT/"* "%MY_COLLECT_PATH%/"
 ) else (
-    start "copy VC Redist x86" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x86/Microsoft.VC142.CRT/"* "%MY_COLLECT_PATH%/"
+    start "copy VC Redist x86" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x86/Microsoft.VC143.CRT/"* "%MY_COLLECT_PATH%/"
 )
 if %ERRORLEVEL% neq 0 goto onError
 
