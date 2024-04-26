@@ -250,7 +250,7 @@ if "%USE_CODE_SIGNING%" == "0" (
             "%APP_NAME_SANITIZED%cmd.exe"
             "%APP_NAME_SANITIZED%sync.dll"
             "%APP_NAME_SANITIZED%_csync.dll"
-            "qt5keychain%DLL_SUFFIX%.dll"
+            "qt6keychain%DLL_SUFFIX%.dll"
             "%LIBCRYPTO_DLL_FILENAME%"
             "%LIBSSL_DLL_FILENAME%"
             "zlib1%DLL_SUFFIX%.dll"
