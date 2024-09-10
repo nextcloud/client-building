@@ -35,6 +35,8 @@ if "%PROJECT_PATH%" == ""                   set PROJECT_PATH=c:/Nextcloud/client
 
 if "%Png2Ico_EXECUTABLE%" == ""             set Png2Ico_EXECUTABLE=c:/Nextcloud/tools/png2ico.exe
 
+if "%msiinfo_EXECUTABLE%" == ""             set "msiinfo_EXECUTABLE=C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x86\msiinfo.exe"
+
 if "%VS_VERSION%" == ""                     set VS_VERSION=2022
 
 Rem Required for Qt's windeployqt to find the VC Redist Setup (and for auto-discovery of signtool.exe)

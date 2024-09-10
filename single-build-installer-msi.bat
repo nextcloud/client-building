@@ -52,6 +52,7 @@ call :testEnv INSTALLER_OUTPUT_PATH
 call :testEnv BUILD_TYPE
 call :testEnv BUILD_ARCH
 call :testEnv BUILD_DATE
+call :testEnv msiinfo_EXECUTABLE
 
 if "%USE_CODE_SIGNING%" == "1" (
     call :testEnv VCINSTALLDIR
@@ -139,6 +140,8 @@ Rem Find MSI, get filename
 for /f "delims=" %%a in ('dir /b "%MY_MSI_PATH%"\*.msi') do (
     set "MSI_FILENAME=%%a"
 )
+
+start "msiinfo.exe" /D "%MY_MSI_PATH" /B /wait %msiinfo_EXECUTABLE% "%MSI_FILENAME%" /A "%APPLICATION_VENDOR%" /J "%APP_NAME%"
 
 if "%USE_CODE_SIGNING%" == "0" (
     echo "** Don't sign: Code signing is disabled by USE_CODE_SIGNING"
