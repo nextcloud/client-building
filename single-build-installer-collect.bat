@@ -126,8 +126,12 @@ if exist "%MY_BUILD_PATH%/src/gui/%APP_NAME_SANITIZED%.ico" (
 )
 if %ERRORLEVEL% neq 0 goto onError
 
+if "%BUILD_TYPE%" == "RelWithDebInfo" (
+    set "PDB_OPTION=--pdb"
+)
+
 echo "* run windeployqt "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.exe."
-start "run windeployqt" /D "%MY_COLLECT_PATH%/" /B /wait windeployqt --compiler-runtime --qmldir "%MY_REPO%\src" --release --force --verbose 2 "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%cmd.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%sync.dll"
+start "run windeployqt" /D "%MY_COLLECT_PATH%/" /B /wait windeployqt %PDB_OPTION% --compiler-runtime --qmldir "%MY_REPO%\src" --pdb --release --force --verbose 2 "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%_csync.dll" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%cmd.exe" "%MY_COLLECT_PATH%/%APP_NAME_SANITIZED%sync.dll"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem Remove Qt bearer plugins, they seem to cause issues on Windows
