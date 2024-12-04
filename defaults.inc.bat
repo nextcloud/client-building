@@ -2,9 +2,6 @@ Rem ****************************************************************************
 rem 			"Build defaults - environment Variables"
 Rem ************************************************************************************************************************************************************************************
 
-rem Release or Debug
-if "%~1" == "Debug" (set "BUILD_TYPE=%~1")
-
 Rem ************************************************************************************************************************************************************************************
 rem 			"CUSTOMIZE HERE:"
 Rem ************************************************************************************************************************************************************************************
@@ -127,7 +124,7 @@ if "%UPLOAD_BUILD%" == ""                   set "UPLOAD_BUILD=1"
 Rem Delete build after successful upload: 1 = delete, 0 = keep (default)
 if "%UPLOAD_DELETE%" == ""                  set "UPLOAD_DELETE=0"
 
-Rem: Note: Storing SFTP_PATH outside in Windows's env leads to trouble due to the preceding slash!
+Rem Note: Storing SFTP_PATH outside in Windows's env leads to trouble due to the preceding slash!
 if "%SFTP_PATH%" == ""                      set "SFTP_PATH=/var/www/html/desktop/daily/Windows"
 if "%SFTP_SERVER%" == ""                    set "SFTP_SERVER="
 if "%SFTP_USER%" == ""                      set "SFTP_USER="
