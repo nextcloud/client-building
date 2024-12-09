@@ -20,7 +20,7 @@ if "%APP_NAME_SANITIZED%" == ""             set "APP_NAME_SANITIZED=Nextcloud"
 
 if "%USE_BRANDING%" == ""                   set "USE_BRANDING=0"
 
-if "%BUILD_TYPE%" == ""                     set "BUILD_TYPE=Release"
+if "%BUILD_TYPE%" == ""                     set "BUILD_TYPE=RelWithDebInfo"
 
 Rem ************************************************************************************************************************************************************************************
 Rem Build environment
