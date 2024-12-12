@@ -88,7 +88,7 @@ rem Reference: https://ss64.com/nt/setlocal.html
 rem Reference: https://ss64.com/nt/start.html
 
 echo "* Run signtool on file: %~1"
-start "signtool" /D "%PROJECT_PATH%" /B /wait "%SIGNTOOL%" sign /debug /v /tr "%SIGN_TIMESTAMP_URL%" /td %SIGN_TIMESTAMP_DIGEST_ALG% /fd %SIGN_FILE_DIGEST_ALG% /f "%CERTIFICATE_FILENAME%" /csp "%CERTIFICATE_CSP%" /kc "[{{%CERTIFICATE_PASSWORD%}}]=%CERTIFICATE_KEY_CONTAINER_NAME%" "%~1"
+start "signtool" /D "%PROJECT_PATH%" /B /wait "%SIGNTOOL%" sign /debug /v /d "Nextcloud Files Client" /tr "%SIGN_TIMESTAMP_URL%" /td %SIGN_TIMESTAMP_DIGEST_ALG% /fd %SIGN_FILE_DIGEST_ALG% /f "%CERTIFICATE_FILENAME%" /csp "%CERTIFICATE_CSP%" /kc "[{{%CERTIFICATE_PASSWORD%}}]=%CERTIFICATE_KEY_CONTAINER_NAME%" "%~1"
 if %ERRORLEVEL% neq 0 goto onError
 
 Rem ******************************************************************************************
