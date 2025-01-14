@@ -22,7 +22,7 @@ Rem Branding options
 
 if "%APP_NAME%" == ""                       set APP_NAME=Nextcloud
 if "%APP_NAME_SANITIZED%" == ""             set APP_NAME_SANITIZED=Nextcloud
-if "%APPLICATION_NAME%" == ""               set "APPLICATION_NAME=Nextcloud File Client"
+if "%APPLICATION_NAME%" == ""               set "APPLICATION_NAME=Nextcloud Files Client"
 
 if "%USE_BRANDING%" == ""                   set USE_BRANDING=0
 
