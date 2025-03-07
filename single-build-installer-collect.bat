@@ -208,6 +208,10 @@ echo "* copy Qt OpenSSL backend plugin"
 start "copy qopensslbackend.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/plugins/tls/qopensslbackend.dll" "%MY_COLLECT_PATH%/tls"
 if %ERRORLEVEL% neq 0 goto
 
+echo "* copy b2-1.dll"
+start "copy b2-1.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/b2-1.dll" "%MY_COLLECT_PATH%/"
+if %ERRORLEVEL% neq 0 goto
+
 Rem deploy-extra: optional extra dll's and other resources
 echo "* copy optional extra resources (dll's, etc.) from %EXTRA_DEPLOY_PATH%/."
 ( dir /b /a "%EXTRA_DEPLOY_PATH%" | findstr . ) > nul && (
