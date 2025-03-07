@@ -143,4 +143,7 @@ if "%CMAKE_EXTRA_FLAGS_DESKTOP%" == ""      set CMAKE_EXTRA_FLAGS_DESKTOP=
 Rem Optional extra flags for the NSIS Installer build tool
 if "%NSIS_EXTRA_FLAGS%" == ""               set NSIS_EXTRA_FLAGS=
 
+if "%WIX%" == ""                            set "WIX=C:/Program Files (x86)/WiX Toolset v3.14"
+if "%WIX_SDK_PATH%" == ""                   set "WIX_SDK_PATH=C:/Program Files (x86)/WiX Toolset v3.14/SDK/VS2017"
+
 Rem ************************************************************************************************************************************************************************************
