@@ -40,6 +40,7 @@ echo "* MY_BUILD_PATH=%MY_BUILD_PATH%"
 echo "* MY_INSTALL_PATH=%MY_INSTALL_PATH%"
 echo "* MY_COLLECT_PATH=%MY_COLLECT_PATH%"
 echo "* MY_MSI_PATH=%MY_MSI_PATH%"
+echo "* WIX=%WIX%"
 
 echo "* PATH=%PATH%"
 
@@ -55,6 +56,7 @@ call :testEnv INSTALLER_OUTPUT_PATH
 call :testEnv BUILD_TYPE
 call :testEnv BUILD_ARCH
 call :testEnv BUILD_DATE
+call :testEnv WIX
 
 if "%USE_CODE_SIGNING%" == "1" (
     call :testEnv VCINSTALLDIR
