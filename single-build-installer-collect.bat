@@ -231,8 +231,10 @@ Rem VC Redist
 echo "* copy VC Redist Runtime DLLs from %VCToolsRedistDir%/."
 if "%BUILD_ARCH%" == "Win64" (
     start "copy VC Redist x64" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x64/Microsoft.VC143.CRT/"* "%MY_COLLECT_PATH%/"
+    start "copy VC OMP Redist x64" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x64/Microsoft.VC143.OpenMP/"* "%MY_COLLECT_PATH%/"
 ) else (
     start "copy VC Redist x86" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x86/Microsoft.VC143.CRT/"* "%MY_COLLECT_PATH%/"
+    start "copy VC OMP Redist x86" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%VCToolsRedistDir%/x86/Microsoft.VC143.OpenMP/"* "%MY_COLLECT_PATH%/"
 )
 if %ERRORLEVEL% neq 0 goto onError
 
