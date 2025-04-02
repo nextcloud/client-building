@@ -138,6 +138,28 @@ if "%USE_CODE_SIGNING%" == "0" (
     echo "** Code signing ends."
 )
 
+REM WiSubStg.vbs is part of the Windows Installer SDK and available with vcvars64.bat
+REM It will be used for embedding extra locales in the MSI.
+echo ** Trying to find WiSubStg.vbs in PATH ^(VC env vars^)
+for %%i in (WiSubStg.vbs) do @set "WISUBSTG=%%~$PATH:i"
+if "!WISUBSTG!" == "" (
+    echo ** Did not find WiSubStg.vbs -- the resulting MSI will be only in English
+) else (
+    echo ** Found WiSubStg.vbs: !WISUBSTG!
+
+    REM WiLangId.vbs ^(also part of the Windows Installer SDK^) is used to update the
+    REM language IDs used in the installer.
+    REM Since WiX doesn't let you specify multiple languages for the Product, we have to
+    REM use this here ...
+    echo ** Trying to find WiLangId.vbs in PATH ^(VC env vars^)
+    for %%i in (WiLangId.vbs) do @set "WILANGID=%%~$PATH:i"
+    if "!WILANGID!" == "" (
+        echo ** Did not find WiLangId.vbs -- the resulting MSI will only be in English
+    ) else (
+        echo ** Found WiLangId.vbs: !WILANGID!
+    )
+)
+
 echo "* Run MSI build script with parameter '%MY_COLLECT_PATH%' to create installer."
 start "make-msi.bat" /D "%MY_MSI_PATH%" /B /wait call make-msi.bat "%MY_COLLECT_PATH%"
 if %ERRORLEVEL% neq 0 goto onError
