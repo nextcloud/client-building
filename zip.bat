@@ -58,7 +58,7 @@ start "tar" /D "%PROJECT_PATH%" /B /wait tar czf %ARCHIVE_FILE_NAME% %FOLDER_TO_
 if %ERRORLEVEL% neq 0 goto onError
 
 echo "* Move archive in target folder: mv %ARCHIVE_FILE_NAME% %TARGET_FOLDER%"
-start "tar" /D "%PROJECT_PATH%" /B /wait mv %ARCHIVE_FILE_NAME% %TARGET_FOLDER%"
+start "mv" /D "%PROJECT_PATH%" /B /wait mv %ARCHIVE_FILE_NAME% %TARGET_FOLDER%"
 
 if %ERRORLEVEL% neq 0 goto onError
 
