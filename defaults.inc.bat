@@ -73,6 +73,7 @@ Rem Git tags for checkout
 Rem Desktop Client (master for daily build or e.g.: stable-2.5.3)
 Rem You may query the available tags with "git tag" within ./desktop
 if "%TAG_DESKTOP%" == ""                    set "TAG_DESKTOP=master"
+if "%CRAFT_TAG_DESKTOP%" == ""              set "CRAFT_TAG_DESKTOP=master"
 
 Rem ************************************************************************************************************************************************************************************
 
