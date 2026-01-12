@@ -9,7 +9,7 @@ Rem ****************************************************************************
 set "BUILD_ARCH=Win64"
 
 call "%~dp0/defaults.inc.bat"
-call "%~dp0/common.inc.bat" "%BUILD_TYPE%" "%BUILD_ARCH%"
+call "%~dp0/common.inc.bat" "%BUILD_TYPE%" "%BUILD_ARCH%" master
 
 Rem ******************************************************************************************
 
