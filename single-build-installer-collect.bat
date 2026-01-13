@@ -8,7 +8,7 @@ Rem ****************************************************************************
 rem 			"environment Variables"
 Rem ******************************************************************************************
 
-call "%~dp0/common.inc.bat" %1 %2
+call "%~dp0/common.inc.bat" %1 %2 %CRAFT_TAG_DESKTOP%
 
 Rem ******************************************************************************************
 
@@ -188,7 +188,7 @@ start "copy zlib1%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRA
 if %ERRORLEVEL% neq 0 goto
 
 echo "* copy KArchive files (bin/)."
-start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF6Archive%DLL_SUFFIX%.dll"* "%CRAFT_PATH%/bin/libbzip2%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/liblzma%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/zstd%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/pcre2-16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/libpng16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/harfbuzz%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
+start "copy bin/" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/KF6Archive%DLL_SUFFIX%.dll"* "%CRAFT_PATH%/bin/bz2%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/liblzma%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/zstd%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/pcre2-16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/libpng16%DLL_SUFFIX%.dll" "%CRAFT_PATH%/bin/harfbuzz%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto onError
 
 echo "* copy brotlicommon.dll"
