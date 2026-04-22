@@ -183,8 +183,8 @@ start "copy libp11.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bi
 if %ERRORLEVEL% neq 0 goto
 
 Rem zlib
-echo "* copy zlib1%DLL_SUFFIX%.dll."
-start "copy zlib1%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/zlib1%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
+echo "* copy z%DLL_SUFFIX%.dll."
+start "copy z%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/z%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto
 
 echo "* copy KArchive files (bin/)."
@@ -271,7 +271,7 @@ if "%USE_CODE_SIGNING%" == "0" (
             "qt6keychain%DLL_SUFFIX%.dll"
             "%LIBCRYPTO_DLL_FILENAME%"
             "%LIBSSL_DLL_FILENAME%"
-            "zlib1%DLL_SUFFIX%.dll"
+            "z%DLL_SUFFIX%.dll"
         ) do (
             start "sign %%~G" /D "%PROJECT_PATH%/" /B /wait %~dp0/sign.bat "%MY_COLLECT_PATH%/%%~G"
 
