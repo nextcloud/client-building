@@ -119,6 +119,18 @@ build the client at any time later:
   BUILD_INSTALLER=0 USE_CODE_SIGNING=0 UPLOAD_BUILD=0 ./build.bat Release
   ```
 
+### Code signing with a second certificate (dual signing)
+- Signed files (the collected exe/dll payload as well as the final MSI) are always signed with the
+  certificate configured via `CERTIFICATE_FILENAME`, `CERTIFICATE_CSP`, `CERTIFICATE_KEY_CONTAINER_NAME`
+  and `CERTIFICATE_PASSWORD` whenever `USE_CODE_SIGNING=1` (default).
+- Optionally, a second, independent signature can be appended on top of the first one by setting
+  `USE_SECOND_CODE_SIGNING=1` and configuring `SECOND_CERTIFICATE_FILENAME`, `SECOND_CERTIFICATE_CSP`,
+  `SECOND_CERTIFICATE_KEY_CONTAINER_NAME` and `SECOND_CERTIFICATE_PASSWORD` (same scheme as the first
+  certificate). `SECOND_SIGN_FILE_DIGEST_ALG`, `SECOND_SIGN_TIMESTAMP_URL` and
+  `SECOND_SIGN_TIMESTAMP_DIGEST_ALG` mirror the equivalent `SIGN_*` variables for the second signature.
+- `USE_SECOND_CODE_SIGNING` is disabled by default (`0`) and has no effect unless `USE_CODE_SIGNING=1`,
+  since the second signature is appended (`signtool sign /as`) to the first one rather than replacing it.
+
 ## :paperclip: Build scripts list
 - build.bat invokes all the other build scripts, stages are:
 
