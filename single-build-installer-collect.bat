@@ -198,8 +198,8 @@ start "copy kdsingleapplication-qt6.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af
 if %ERRORLEVEL% neq 0 goto
 
 Rem zlib
-echo "* copy zlib1%DLL_SUFFIX%.dll."
-start "copy zlib1%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/zlib1%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
+echo "* copy zlib%DLL_SUFFIX%.dll."
+start "copy zlib1%DLL_SUFFIX%.dll" /D "%MY_COLLECT_PATH%/" /B /wait cp -af "%CRAFT_PATH%/bin/zlib%DLL_SUFFIX%.dll" "%MY_COLLECT_PATH%/"
 if %ERRORLEVEL% neq 0 goto
 
 echo "* copy KArchive files (bin/)."
