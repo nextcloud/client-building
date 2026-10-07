@@ -277,22 +277,21 @@ if "%USE_CODE_SIGNING%" == "0" (
     echo "** Code signing begins:"
 
     for %%G in (
-            "NCContextMenu.dll"
-            "NCOverlays.dll"
             "%APP_NAME_SANITIZED%.exe"
             "%APP_NAME_SANITIZED%cmd.exe"
-            "%APP_NAME_SANITIZED%sync.dll"
-            "%APP_NAME_SANITIZED%_csync.dll"
-            "qt6keychain%DLL_SUFFIX%.dll"
-            "%LIBCRYPTO_DLL_FILENAME%"
-            "%LIBSSL_DLL_FILENAME%"
-            "zlib1%DLL_SUFFIX%.dll"
         ) do (
             start "sign %%~G" /D "%PROJECT_PATH%/" /B /wait %~dp0/sign.bat "%MY_COLLECT_PATH%/%%~G"
 
             if !ERRORLEVEL! neq 0 goto onError
         )
-    
+
+    rem Sign every DLL collected for the installer, wherever windeployqt or the copy steps above put it
+    for /r "%MY_COLLECT_PATH%" %%G in (*.dll) do (
+            start "sign %%~nxG" /D "%PROJECT_PATH%/" /B /wait %~dp0/sign.bat "%%G"
+
+            if !ERRORLEVEL! neq 0 goto onError
+        )
+
     echo "** Code signing ends."
 )
 
